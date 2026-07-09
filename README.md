@@ -347,7 +347,8 @@ A standalone script (`migrate.js`) built to securely migrate database records fr
 - **Navbar Theme Toggler**: Dedicated switch components inside main header blocks to toggle light/dark designs.
 
 ---
+## 📜 License
+This project is for educational purposes. Feel free to use the code for your own learning or projects.
 
-## License
-
-This project is licensed under the MIT License.
+---
+© 2026 Meet Sheth. All rights reserved.
