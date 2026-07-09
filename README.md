@@ -351,4 +351,5 @@ A standalone script (`migrate.js`) built to securely migrate database records fr
 This project is for educational purposes. Feel free to use the code for your own learning or projects.
 
 ---
-© 2026 Meet Sheth. All rights reserved.
+Code. Create. Compete.
+Built by Mit Sheth 🚀
