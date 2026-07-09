@@ -1,0 +1,140 @@
+/* ================= CREATE TOURNAMENT (ADMIN STYLE) ================= */
+
+.ct-page {
+  min-height: calc(100vh - 80px);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.ct-card {
+  width: 100%;
+  max-width: 1000px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ================= TITLE ================= */
+.ct-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 30px;
+}
+
+.ct-title span {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+/* ================= FORM ================= */
+.ct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ================= GROUP ================= */
+.ct-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ct-group input,
+.ct-group select,
+.ct-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.ct-group input:focus,
+.ct-group select:focus,
+.ct-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ================= ROW ================= */
+.ct-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ================= TEXTAREA ================= */
+.ct-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* ================= FILE INPUT ================= */
+.ct-group input[type="file"] {
+  padding: 8px;
+}
+
+/* ================= BUTTON ================= */
+.ct-btn {
+  margin-top: 20px;
+  align-self: flex-start;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+.ct-btn:hover {
+  background: #1e40af;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .ct-card {
+    padding: 25px;
+  }
+
+  .ct-title {
+    font-size: 22px;
+  }
+
+  .ct-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Glassmorphism overrides */
+.ct-page .ct-card {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+}
+
+:root[data-theme="dark"] .ct-page .ct-card {
+  background: rgba(17, 24, 39, 0.35) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 24px !important;
+}

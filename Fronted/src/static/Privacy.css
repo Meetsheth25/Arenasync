@@ -1,0 +1,85 @@
+.privacy-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.privacy-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.privacy-header h1 {
+  font-size: 36px;
+  color: var(--text) !important;
+  margin-bottom: 10px;
+}
+
+.privacy-header p {
+  font-size: 14px;
+  color: var(--text-secondary) !important;
+}
+
+.privacy-content section {
+  margin-bottom: 30px;
+}
+
+.privacy-content h2 {
+  font-size: 22px;
+  color: var(--text) !important;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0F4C81 !important;
+  display: inline-block;
+}
+
+.privacy-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary) !important;
+  margin-bottom: 15px;
+}
+
+.privacy-content ul {
+  padding-left: 25px;
+}
+
+.privacy-content li {
+  margin-bottom: 10px;
+  color: var(--text-secondary) !important;
+  line-height: 1.5;
+}
+
+.privacy-content {
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .privacy-header h1 {
+    font-size: 28px;
+  }
+  
+  .privacy-content h2 {
+    font-size: 18px;
+  }
+}
+
+/* Dark Mode Overrides */
+:root[data-theme="dark"] .privacy-header h1 {
+  color: #f3f4f6 !important;
+}
+
+:root[data-theme="dark"] .privacy-header p {
+  color: #9ca3af !important;
+}
+
+:root[data-theme="dark"] .privacy-content h2 {
+  color: #f3f4f6 !important;
+  border-bottom-color: #0F4C81 !important;
+}
+
+:root[data-theme="dark"] .privacy-content p,
+:root[data-theme="dark"] .privacy-content li {
+  color: #d1d5db !important;
+}

@@ -1,0 +1,175 @@
+body{
+  color: black;
+}
+
+/* ================= CREATE TOURNAMENT PAGE ================= */
+.ct-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.ct-card {
+  background: white;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.ct-card h2 {
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.ct-card p {
+  color: #000000;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Form Styles */
+.ct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ct-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ct-group label {
+  font-weight: 600;
+  color: #000000;
+  font-size: 14px;
+}
+
+.ct-group input,
+.ct-group select,
+.ct-group textarea {
+  padding: 12px 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.ct-group input:focus,
+.ct-group select:focus,
+.ct-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.ct-group input::placeholder,
+.ct-group textarea::placeholder {
+  color: #000000;
+}
+
+/* Row Layout */
+.ct-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* File Input */
+.ct-group input[type="file"] {
+  padding: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.ct-group input[type="file"]::-webkit-file-upload-button {
+  padding: 8px 16px;
+  background: #2563eb;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+/* Submit Button */
+.ct-btn {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%);
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.ct-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+.ct-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ct-card {
+    padding: 20px;
+  }
+
+  .ct-card h2 {
+    font-size: 22px;
+  }
+
+  .ct-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ct-group input,
+  .ct-group select,
+  .ct-group textarea {
+    padding: 10px 12px;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .ct-card {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .ct-card h2 {
+    color: #000000;
+  }
+
+  .ct-group label {
+    color: #000000;
+  }
+
+  .ct-group input,
+  .ct-group select,
+  .ct-group textarea {
+    background: #374151;
+    border-color: #4b5563;
+    color: #000000;
+  }
+
+  .ct-group input::placeholder,
+  .ct-group textarea::placeholder {
+    color: #0000003e;
+  }
+}

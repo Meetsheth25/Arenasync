@@ -1,0 +1,196 @@
+/* ================= LAYOUT ================= */
+.reg-page {
+  min-height: 100vh;
+  background: transparent !important;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+/* ================= CARD ================= */
+.reg-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.reg-card h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ================= TABLE ================= */
+.reg-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reg-table thead {
+  background: #f1f5f9;
+}
+
+.reg-table th,
+.reg-table td {
+  padding: 14px 12px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.reg-table th {
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+}
+
+.reg-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* ================= STATUS ================= */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* approval status */
+.status.pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* payment status */
+.status.paid {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.status.unpaid {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.reg-table button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 6px;
+  transition: all 0.2s ease;
+}
+
+/* approve */
+.reg-table button.approve {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.reg-table button.approve:hover {
+  background: #16a34a;
+}
+
+/* reject */
+.reg-table button.reject {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.reg-table button.reject:hover {
+  background: #dc2626;
+}
+
+/* disabled */
+.reg-table button:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .reg-page {
+    padding: 16px;
+  }
+
+  .reg-card {
+    padding: 18px;
+  }
+
+  .reg-table th,
+  .reg-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Glassmorphism overrides */
+.reg-page .reg-card {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+}
+
+:root[data-theme="dark"] .reg-page .reg-card {
+  background: rgba(17, 24, 39, 0.35) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 24px !important;
+}
+
+/* Scoped table transparency overrides for Registrations page */
+.reg-page table,
+.reg-page thead,
+.reg-page tbody,
+.reg-page tr,
+.reg-page td,
+.reg-page th {
+  background: transparent !important;
+}
+
+/* approved_pending_payment status badge */
+.status.approved_pending_payment {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* payment status styles */
+.payment {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.payment.paid {
+  background: #dcfce7;
+  color: #15803d;
+}
+.payment.unpaid {
+  background: #fee2e2;
+  color: #b91c1c;
+}

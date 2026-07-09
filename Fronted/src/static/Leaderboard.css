@@ -1,0 +1,211 @@
+/* ================= LEADERBOARD PAGE ================= */
+.leaderboard-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+  border-radius: 20px;
+}
+
+/* Header */
+.leaderboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.leaderboard-header h1 {
+  font-size: 36px;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.leaderboard-header p {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+/* Table */
+.leaderboard-table {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(14px) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 24px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.5fr 100px 100px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%);
+  color: white;
+  padding: 15px 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.5fr 100px 100px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s;
+  align-items: center;
+}
+
+.table-row:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(5px);
+}
+
+/* Rank Column */
+.rank {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.medal {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+}
+
+/* Team Column */
+.team {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Tournament Column */
+.tournament {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Matches & Wins */
+.matches, .wins {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+/* Loading State */
+.loading-spinner {
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.loading-spinner::before {
+  content: "?";
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty State */
+.empty-leaderboard {
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 16px;
+  color: #9ca3af;
+}
+
+.empty-leaderboard p {
+  font-size: 18px;
+}
+
+/* Top 3 Special Styling */
+.table-row:first-child .team {
+  color: #D4AF37 !important;
+}
+
+.table-row:nth-child(2) .team {
+  color: #94a3b8 !important;
+}
+
+.table-row:nth-child(3) .team {
+  color: #cd7f32 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leaderboard-page {
+    padding: 20px 15px;
+  }
+
+  .leaderboard-header h1 {
+    font-size: 28px;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 60px 1.5fr 1fr 70px 70px;
+    gap: 8px;
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+
+  .rank {
+    font-size: 14px;
+  }
+
+  .medal {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+  }
+
+  .team {
+    font-size: 13px;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .leaderboard-header h1 {
+    color: #f3f4f6;
+  }
+
+  .leaderboard-table {
+    background: rgba(17, 24, 39, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 24px !important;
+  }
+
+  .table-row {
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .table-row:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  .team {
+    color: #f3f4f6;
+  }
+
+  .empty-leaderboard {
+    background: #1f2937;
+  }
+}

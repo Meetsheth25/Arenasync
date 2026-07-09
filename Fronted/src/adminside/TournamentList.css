@@ -1,0 +1,362 @@
+/* Add these styles to your existing TournamentList.css */
+
+/* ================= MODAL OVERLAY ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: Glass(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ================= MODAL ================= */
+.modal {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= MODAL HEADER ================= */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.modal-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* ================= MODAL BODY ================= */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* ================= FORM GROUPS ================= */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: #d1d5db;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ================= FORM ROW ================= */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+/* ================= MODAL FOOTER ================= */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 0.625rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.btn-save {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-save:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-cancel:active,
+.btn-save:active {
+  transform: translateY(0);
+}
+
+/* ================= TABLE ENHANCEMENTS ================= */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.participants-info {
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* ================= LOADING STATE ================= */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= EMPTY STATE ================= */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+}
+
+.empty-state p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 640px) {
+  .modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .modal-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .btn-cancel,
+  .btn-save {
+    width: 100%;
+    text-align: center;
+  }
+
+  .actions-cell {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Glassmorphism overrides for admin tournaments list */
+.admin-navbar~.main-content div[style*="fixed"]>div,
+.admin-navbar~.main-content div[style*="position: fixed"]>div,
+.admin-layout .modal {
+  background: rgba(255, 255, 255, 0.65) !important;
+  /* more opaque modal background */
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="fixed"]>div,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="position: fixed"]>div,
+:root[data-theme="dark"] .admin-layout .modal {
+  background: rgba(17, 24, 39, 0.75) !important;
+  /* more opaque modal background */
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 24px !important;
+  color: white !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="fixed"] h3,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="position: fixed"] h3 {
+  color: white !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="fixed"] input,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="fixed"] select,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="position: fixed"] input,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="position: fixed"] select {
+  background: rgba(17, 24, 39, 0.6) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="fixed"] input::placeholder,
+:root[data-theme="dark"] .admin-navbar~.main-content div[style*="position: fixed"] input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Scoped table overrides for admin tournaments list */
+.admin-navbar~.main-content table,
+.admin-layout table {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden !important;
+}
+
+.admin-navbar~.main-content table th,
+.admin-navbar~.main-content table td,
+.admin-navbar~.main-content table tr,
+.admin-layout table th,
+.admin-layout table td {
+  background: transparent !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content table,
+:root[data-theme="dark"] .admin-layout table {
+  background: rgba(17, 24, 39, 0.35) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 24px !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content table th,
+:root[data-theme="dark"] .admin-navbar~.main-content table td {
+  color: white !important;
+}
+
+:root[data-theme="dark"] .admin-navbar~.main-content h2,
+:root[data-theme="dark"] .admin-navbar~.main-content h3 {
+  color: white !important;
+}

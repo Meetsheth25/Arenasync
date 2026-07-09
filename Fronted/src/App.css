@@ -1,0 +1,1078 @@
+/* =========================
+   GLOBAL THEME VARIABLES
+========================= */
+/* LIGHT THEME */
+:root {
+  /* Backgrounds */
+  --bg: #EEF3F8;
+  --canvas-bg: #ABC4D7;
+  --canvas-gradient: linear-gradient(135deg, #BACFE0 0%, #A2BDD3 35%, #ABC6DC 65%, #92B0C8 100%);
+  --nav-bg: #FFFFFF;
+  --nav-bg-scroll: rgba(255, 255, 255, 0.85);
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --card: #FFFFFF;
+
+  /* Typography */
+  --text: #0F172A;
+  /* Text Primary */
+  --text-secondary: #334155;
+  /* Text Secondary */
+  --text-muted: #475569;
+
+  /* Primary Brand Colors */
+  --primary: #0F4C81;
+  /* Brand Blue */
+  --primary-hover: #0A365C;
+  --primary-light: #EFF6FF;
+  --accent: #0F4C81;
+  --teal: #0F766E;
+  --navy: #0B1220;
+
+  /* Accents (Sparingly used) */
+  --gold: #D4AF37;
+  /* Luxury Gold */
+  --gold-champagne: #E6C878;
+  --silver: #C0C0C0;
+
+  /* Borders & Shadows */
+  --border: #E2E8F0;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+
+  /* Status Colors */
+  --success: #15803D;
+  --success-light: #ECFDF5;
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEF2F2;
+  --info: #0F4C81;
+  --info-light: #EFF6FF;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Glass Variables */
+  --glass-bg: rgba(255, 255, 255, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="dark"] {
+  --glass-bg: rgba(17, 24, 39, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* DARK THEME */
+:root[data-theme="dark"] {
+  /* Backgrounds */
+  --bg: #050814;
+  /* Midnight Black/Navy */
+  --canvas-bg: #020617;
+  --canvas-gradient: linear-gradient(135deg, #020617 0%, #060F22 45%, #01040A 75%, #03081A 100%);
+  --nav-bg: #0B1220;
+  --nav-bg-scroll: rgba(11, 18, 32, 0.85);
+  --surface: #111827;
+  /* Rich Charcoal */
+  --surface-2: #0B1220;
+  --card: #111827;
+
+  /* Typography */
+  --text: #FFFFFF;
+  --text-secondary: #E5E7EB;
+  --text-muted: #94A3B8;
+
+  /* Primary Brand Colors */
+  --primary: #0F4C81;
+  /* Brand Blue */
+  --primary-hover: #0A365C;
+  --primary-light: rgba(15, 76, 129, 0.15);
+  --accent: #0F4C81;
+  --teal: #0F766E;
+  --navy: #0B1220;
+
+  /* Accents (Sparingly used) */
+  --gold: #D4AF37;
+  /* Luxury Gold */
+  --gold-champagne: #E6C878;
+  --silver: #C0C0C0;
+
+  /* Borders & Shadows */
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+
+  /* Status Colors */
+  --success: #15803D;
+  --success-light: rgba(21, 128, 61, 0.15);
+  --warning: #F59E0B;
+  --warning-light: rgba(245, 158, 11, 0.15);
+  --danger: #DC2626;
+  --danger-light: rgba(220, 38, 38, 0.15);
+  --info: #0F4C81;
+  --info-light: rgba(15, 76, 129, 0.15);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* 3D Background Canvas - Light & Dark Mode */
+.three-bg-canvas {
+  background: var(--canvas-gradient, var(--canvas-bg)) !important;
+  transition: background 0.5s ease;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+  transition: background 0.3s, color 0.3s;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   NAVBAR / HEADER
+========================= */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+nav h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+nav a {
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+nav button {
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+}
+
+/* =========================
+   HOME PAGE
+========================= */
+.home {
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.home h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.home p {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* Sports Cards */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--card);
+  width: 220px;
+  padding: 35px 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   AUTH PAGES (LOGIN / REGISTER)
+========================= */
+.auth-box {
+  max-width: 350px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-box input,
+.auth-box select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+.auth-box input::placeholder {
+  color: #94a3b8;
+}
+
+.auth-box select {
+  cursor: pointer;
+}
+
+.auth-box button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-box p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-box a {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* =========================
+   FOOTER (OPTIONAL)
+========================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--card);
+  margin-top: 60px;
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .home h1 {
+    font-size: 32px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+.page {
+  padding: 100px;
+}
+
+.page h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   3D PREMIUM & LIGHT SWEEP UTILITIES
+   ========================================= */
+.perspective-viewport {
+  perspective: 1200px;
+}
+
+.glow-card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+/* Light Sweep Effect */
+.light-sweep-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.light-sweep-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: rotate(25deg);
+  transition: all 0.7s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.light-sweep-wrapper:hover::after {
+  left: 120%;
+  opacity: 1;
+  transition: all 0.7s ease;
+}
+
+:root[data-theme="dark"] .light-sweep-wrapper::after {
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0) 100%);
+}
+
+/* Premium Border Highlights */
+.border-3d-glow {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.05), var(--shadow);
+}
+
+.border-3d-glow:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 25px -5px rgba(37, 99, 235, 0.12), var(--shadow-md);
+}
+
+/* Glass panel */
+.glass-panel-premium {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: Glass(16px);
+  -webkit-backdrop-filter: Glass(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+:root[data-theme="dark"] .glass-panel-premium {
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 3D Floating elements */
+@keyframes float3D {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.float-element-3d {
+  animation: float3D 6s ease-in-out infinite;
+}
+
+/* =========================================
+   GLASS PAGE WRAPPERS — 3D CANVAS VISIBLE
+   Hierarchy: ThreeBgCanvas → Glass Wrapper → Solid Cards
+   ========================================= */
+
+/* Primary page containers — premium glass layer */
+.login-page,
+.register-page,
+.forgot-password-page,
+.otp-page,
+.profile-page,
+.profile-container,
+.dashboard-page,
+.dashboard-wrapper,
+.about-page,
+.about-container,
+.contact-page,
+.faq-page,
+.faq-container,
+.privacy-page,
+.privacy-container,
+.terms-page,
+.terms-container,
+.leaderboard-page,
+.gallery-page,
+.gallery-section,
+.schedule-page,
+.events-page,
+.events-container,
+.venue-page,
+.my-team-dashboard,
+.my-teams-container,
+.my-tournaments-container,
+.my-registrations-container,
+.organizer-dashboard,
+.org-dashboard-container,
+.sports-event-page,
+.tournament-details-page,
+.tournament-content,
+.tournaments-page,
+.tournaments-container,
+.description-section,
+.rules-section,
+.results-page,
+.match-results,
+.matches-page,
+.match-list,
+.notifications-page,
+.notifications-container,
+.contact-page,
+.speakers-page,
+.teams-list-page,
+.match-results-page,
+.matchlist-container,
+.admin-sponsor-container,
+.reg-page,
+.match-page,
+.ct-page {
+  background: transparent !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass (14px) !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Admin layout — transparent flex shell (sidebar + content) */
+.admin-layout,
+.admin-dashboard {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Admin content area — glass (the visible work area) */
+.admin-layout>.content,
+.admin-layout>main.content {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Dark mode glass for all page wrappers */
+:root[data-theme="dark"] .login-page,
+:root[data-theme="dark"] .register-page,
+:root[data-theme="dark"] .forgot-password-page,
+:root[data-theme="dark"] .otp-page,
+:root[data-theme="dark"] .profile-page,
+:root[data-theme="dark"] .profile-container,
+:root[data-theme="dark"] .dashboard-page,
+:root[data-theme="dark"] .dashboard-wrapper,
+:root[data-theme="dark"] .about-page,
+:root[data-theme="dark"] .about-container,
+:root[data-theme="dark"] .contact-page,
+:root[data-theme="dark"] .faq-page,
+:root[data-theme="dark"] .faq-container,
+:root[data-theme="dark"] .privacy-page,
+:root[data-theme="dark"] .privacy-container,
+:root[data-theme="dark"] .terms-page,
+:root[data-theme="dark"] .terms-container,
+:root[data-theme="dark"] .leaderboard-page,
+:root[data-theme="dark"] .gallery-page,
+:root[data-theme="dark"] .gallery-section,
+:root[data-theme="dark"] .schedule-page,
+:root[data-theme="dark"] .events-page,
+:root[data-theme="dark"] .events-container,
+:root[data-theme="dark"] .venue-page,
+:root[data-theme="dark"] .my-team-dashboard,
+:root[data-theme="dark"] .my-teams-container,
+:root[data-theme="dark"] .my-tournaments-container,
+:root[data-theme="dark"] .my-registrations-container,
+:root[data-theme="dark"] .organizer-dashboard,
+:root[data-theme="dark"] .org-dashboard-container,
+:root[data-theme="dark"] .sports-event-page,
+:root[data-theme="dark"] .tournament-details-page,
+:root[data-theme="dark"] .tournament-content,
+:root[data-theme="dark"] .tournaments-page,
+:root[data-theme="dark"] .tournaments-container,
+:root[data-theme="dark"] .description-section,
+:root[data-theme="dark"] .rules-section,
+:root[data-theme="dark"] .results-page,
+:root[data-theme="dark"] .match-results,
+:root[data-theme="dark"] .matches-page,
+:root[data-theme="dark"] .match-list,
+:root[data-theme="dark"] .notifications-page,
+:root[data-theme="dark"] .notifications-container,
+:root[data-theme="dark"] .speakers-page,
+:root[data-theme="dark"] .teams-list-page,
+:root[data-theme="dark"] .match-results-page,
+:root[data-theme="dark"] .matchlist-container,
+:root[data-theme="dark"] .admin-sponsor-container,
+:root[data-theme="dark"] .reg-page,
+:root[data-theme="dark"] .match-page,
+:root[data-theme="dark"] .ct-page {
+  background: transparent !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass (14px) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] .admin-layout>.content,
+:root[data-theme="dark"] .admin-layout>main.content {
+  background: transparent !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass (14px) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+
+
+/* Translucent Glass Cards & Panels with 3D shadows */
+.card,
+.login-card,
+.register-card,
+.stat-card,
+.event-card,
+.tournament-card,
+.team-card,
+.match-card,
+.result-card,
+.stat-card,
+.info-card,
+.gallery-card,
+.faq-item,
+.notification-card,
+.profile-section,
+.profile-card,
+.registration-card,
+.dashboard-card,
+.analytics-card,
+.organizer-card,
+.admin-card,
+.venue-card,
+.sponsor-card,
+.leaderboard-card,
+.panel {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease !important;
+}
+
+.notif-popup {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(148, 163, 184, 0.15) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease !important;
+}
+
+:root[data-theme="dark"] .event-card,
+:root[data-theme="dark"] .tournament-card,
+:root[data-theme="dark"] .team-card,
+:root[data-theme="dark"] .match-card,
+:root[data-theme="dark"] .result-card,
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .info-card,
+:root[data-theme="dark"] .gallery-card,
+:root[data-theme="dark"] .faq-item,
+:root[data-theme="dark"] .notification-card,
+:root[data-theme="dark"] .profile-section,
+:root[data-theme="dark"] .profile-card,
+:root[data-theme="dark"] .registration-card,
+:root[data-theme="dark"] .dashboard-card,
+:root[data-theme="dark"] .analytics-card,
+:root[data-theme="dark"] .organizer-card,
+:root[data-theme="dark"] .admin-card,
+:root[data-theme="dark"] .venue-card,
+:root[data-theme="dark"] .sponsor-card,
+:root[data-theme="dark"] .leaderboard-card,
+:root[data-theme="dark"] .panel {
+  background: rgba(17, 24, 39, 0.25) !important;
+  backdrop-filter: Glass(14px) !important;
+  -webkit-backdrop-filter: Glass (14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+}
+
+:root[data-theme="dark"] .notif-popup {
+  background: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .login-card,
+:root[data-theme="dark"] .register-card {
+  background: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.card:hover,
+.login-card:hover,
+.register-card:hover,
+.stat-card:hover,
+.panel:hover,
+.profile-card:hover,
+.tournament-card:hover,
+.team-card:hover,
+.match-card:hover,
+.sponsor-card:hover,
+.notification-card:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+  box-shadow: 0 20px 40px rgba(10, 15, 31, 0.12), 0 0 20px rgba(37, 99, 235, 0.15) !important;
+  border-color: rgba(37, 99, 235, 0.35) !important;
+}
+
+/* =========================================
+   CARD VARIATIONS SYSTEM
+   ========================================= */
+.card-standard {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border) !important;
+}
+
+:root[data-theme="dark"] .card-standard {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.card-featured {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border) !important;
+  border-top: 4px solid var(--primary) !important;
+}
+
+:root[data-theme="dark"] .card-featured {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-top: 4px solid var(--primary) !important;
+}
+
+.card-premium {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  border-top: 4px solid var(--gold) !important;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.05), 0 1px 3px rgba(212, 175, 55, 0.02) !important;
+}
+
+:root[data-theme="dark"] .card-premium {
+  background: var(--surface) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  border-top: 4px solid var(--gold) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.card-statistics {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border) !important;
+}
+
+:root[data-theme="dark"] .card-statistics {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.card-statistics .card-header,
+.card-statistics h3,
+.card-statistics .stats-header {
+  border-bottom: 2px solid var(--primary) !important;
+  color: var(--primary) !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Forms & Input Overrides */
+input,
+select,
+textarea,
+.input-group input {
+  background: #FFFFFF !important;
+  border: 1.5px solid #94A3B8 !important;
+  border-radius: var(--radius, 10px) !important;
+  color: var(--text) !important;
+  backdrop-filter: Glass(8px) !important;
+  -webkit-backdrop-filter: Glass(8px) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .input-group input {
+  background: #1E293B !important;
+  border: 1.5px solid #475569 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.input-group input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.15) !important;
+  background: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus,
+:root[data-theme="dark"] .input-group input:focus {
+  background: #1E293B !important;
+  box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.25) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Global Placeholder Styling */
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] select::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #94A3B8 !important;
+  opacity: 1 !important;
+}
+
+/* Modernized Tables */
+
+table {
+  border-spacing: 0 8px !important;
+  border-collapse: separate !important;
+}
+
+thead {
+  background: transparent !important;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(148, 163, 184, 0.15) !important;
+  backdrop-filter: Glass(4px) !important;
+  -webkit-backdrop-filter: Glass(4px) !important;
+  border-radius: var(--radius-sm, 6px) !important;
+  padding: 14px 18px !important;
+  color: var(--text-secondary) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+:root[data-theme="dark"] th {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-muted) !important;
+}
+
+td {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: none !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1) !important;
+  padding: 16px 18px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+td:first-child {
+  border-left: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-top-left-radius: var(--radius, 10px) !important;
+  border-bottom-left-radius: var(--radius, 10px) !important;
+}
+
+td:last-child {
+  border-right: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-top-right-radius: var(--radius, 10px) !important;
+  border-bottom-right-radius: var(--radius, 10px) !important;
+}
+
+:root[data-theme="dark"] td {
+  background: rgba(17, 24, 39, 0.4) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+:root[data-theme="dark"] td:first-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+:root[data-theme="dark"] td:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+tbody tr {
+  transition: transform 0.25s ease !important;
+}
+
+tbody tr:hover td {
+  background: rgba(37, 99, 235, 0.05) !important;
+  color: var(--primary) !important;
+}
+
+:root[data-theme="dark"] tbody tr:hover td {
+  background: rgba(37, 99, 235, 0.12) !important;
+}
+
+/* Premium Navigation Headers & Sidebars */
+.navbar,
+.admin-navbar {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: Glass(16px) !important;
+  -webkit-backdrop-filter: Glass(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+:root[data-theme="dark"] .navbar,
+:root[data-theme="dark"] .admin-navbar {
+  background: rgba(10, 15, 31, 0.75) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.sidebar {
+  background: rgba(10, 15, 31, 0.85) !important;
+  backdrop-filter: Glass(20px) !important;
+  -webkit-backdrop-filter: Glass(20px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.sidebar button.menu,
+.sidebar .menu {
+  border-radius: var(--radius-sm, 6px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.sidebar button.menu:hover,
+.sidebar .menu:hover,
+.sidebar .menu.active {
+  background: rgba(37, 99, 235, 0.15) !important;
+  color: var(--primary) !important;
+  transform: translateX(4px) !important;
+}
+
+/* Interactive Light Sweep Buttons */
+/* Interactive Light Sweep Buttons */
+.btn,
+.login-btn,
+.register-btn,
+.primary-btn,
+.btn-primary {
+  position: relative !important;
+  overflow: hidden !important;
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  /* Pill style */
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  padding: 12px 28px !important;
+  /* Larger click targets */
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 6px 20px rgba(15, 76, 129, 0.15) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn:hover,
+.login-btn:hover,
+.register-btn:hover,
+.primary-btn:hover,
+.btn-primary:hover {
+  transform: translateY(-2.5px) !important;
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.3) !important;
+  background: var(--primary-hover) !important;
+}
+
+.btn::after,
+.login-btn::after,
+.register-btn::after,
+.primary-btn::after,
+.btn-primary::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -60% !important;
+  width: 30% !important;
+  height: 200% !important;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%) !important;
+  transform: rotate(25deg) !important;
+  transition: all 0.7s ease !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.btn:hover::after,
+.login-btn:hover::after,
+.register-btn:hover::after,
+.primary-btn:hover::after,
+.btn-primary:hover::after {
+  left: 120% !important;
+  opacity: 1 !important;
+}
+
+/* Raw Button Default (no !important overrides to let classes inherit) */
+button {
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 12px 28px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 20px rgba(15, 76, 129, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.3);
+  transform: translateY(-2.5px);
+}
+
+/* Secondary & Outline Buttons */
+.secondary-btn,
+.btn-secondary,
+.btn-outline,
+.cta-secondary {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #FFFFFF !important;
+  color: var(--primary) !important;
+  border: 1.5px solid var(--primary) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  padding: 12px 28px !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] .secondary-btn,
+:root[data-theme="dark"] .btn-secondary,
+:root[data-theme="dark"] .btn-outline,
+:root[data-theme="dark"] .cta-secondary {
+  background: #111827 !important;
+  /* Rich Charcoal */
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+.secondary-btn:hover,
+.btn-secondary:hover,
+.btn-outline:hover,
+.cta-secondary:hover {
+  transform: translateY(-2.5px) !important;
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 20px rgba(15, 76, 129, 0.2) !important;
+}
+
+:root[data-theme="dark"] .secondary-btn:hover,
+:root[data-theme="dark"] .btn-secondary:hover,
+:root[data-theme="dark"] .btn-outline:hover,
+:root[data-theme="dark"] .cta-secondary:hover {
+  background: var(--primary) !important;
+  /* Brand Blue */
+  border-color: var(--primary) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 20px rgba(15, 76, 129, 0.3) !important;
+}
+
+/* ==========================================================================
+   GLOBAL HEADER HEIGHT CLEARANCE FOR MAIN CONTENT
+   Ensures all pages render below the fixed navigation bar and admin breadcrumbs.
+   ========================================================================== */
+
+.main-content {
+  padding-top: 108px !important;
+  /* Clears the 72px navbar + 16px floating margin + 20px bottom clearance */
+}
+
+/* For admin layout which renders the absolute-positioned breadcrumb below navbar */
+.admin-navbar~.main-content {
+  padding-top: 140px !important;
+  /* Clears floating navbar, admin breadcrumb, and margins */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1250px) {
+  .main-content {
+    padding-top: 108px !important;
+  }
+
+  .admin-navbar~.main-content {
+    padding-top: 140px !important;
+  }
+}

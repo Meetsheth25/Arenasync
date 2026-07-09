@@ -1,0 +1,189 @@
+/* ================= MATCH RESULTS PAGE ================= */
+.match-results-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* ================= TOURNAMENT RESULTS ================= */
+.tournament-results {
+  margin-bottom: 40px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] .tournament-results {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tournament-results h2 {
+  font-size: 22px;
+  color: #1f2937;
+  padding: 20px 25px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+:root[data-theme="dark"] .tournament-results h2 {
+  background: rgba(0, 0, 0, 0.2) !important;
+  color: #f3f4f6 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Results Table */
+.results-table {
+  overflow-x: auto;
+}
+
+.results-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.results-table th {
+  text-align: left;
+  padding: 15px 20px;
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.results-table td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #4b5563;
+}
+
+.results-table tr:hover {
+  background: #f9fafb;
+}
+
+.winner {
+  font-weight: 600;
+  color: #10b981;
+}
+
+.score {
+  font-weight: 600;
+  color: var(--primary);
+  font-family: monospace;
+  font-size: 16px;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border: 1px dashed rgba(255, 255, 255, 0.35) !important;
+  border-radius: 16px;
+}
+
+.no-results p {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.loading::before {
+  content: "⏳";
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .match-results-page {
+    padding: 20px 15px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .tournament-results h2 {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .score {
+    font-size: 13px;
+  }
+}
+
+/* Dark Mode Overrides */
+:root[data-theme="dark"] .page-header h1 {
+  color: #f3f4f6 !important;
+}
+
+:root[data-theme="dark"] .page-header p {
+  color: #9ca3af !important;
+}
+
+:root[data-theme="dark"] .results-table th {
+  background: #111827 !important;
+  color: #e5e7eb !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+:root[data-theme="dark"] .results-table td {
+  color: #d1d5db !important;
+  background: #1f2937 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+:root[data-theme="dark"] .results-table tr:hover td {
+  background: #374151 !important;
+}
+
+:root[data-theme="dark"] .no-results {
+  background: rgba(15, 18, 32, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+:root[data-theme="dark"] .no-results p {
+  color: #9ca3af !important;
+}

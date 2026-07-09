@@ -1,0 +1,222 @@
+/* =========================================
+   FOOTER BASE (PREMIUM SPORTS-TECH)
+   ========================================= */
+.footer {
+  background: #0B1220 !important;
+  color: #94A3B8 !important;
+  padding: 48px 0 0 0; /* Compact top padding */
+  border-top: 4px solid #D4AF37 !important; /* Premium Gold top border */
+}
+
+/* =========================================
+   GRID LAYOUT
+   ========================================= */
+.footer-container {
+  max-width: 1400px; /* Match standard page width */
+  margin: 0 auto;
+  padding: 0 40px 36px;
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1.5fr; /* Aligned columns spacing */
+  gap: 32px; /* Compressed spacing */
+}
+
+.footer-col {
+  transition: all 0.2s ease;
+}
+
+.footer-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  color: #94A3B8 !important;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Headings */
+.footer-col h4 {
+  margin-bottom: 14px; /* Cleaner spacing */
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff !important;
+  position: relative;
+  padding-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.footer-col h4::after {
+  content: "";
+  width: 20px;
+  height: 2px;
+  background: #0F4C81 !important; /* Brand Blue */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+/* Text & Info */
+.footer-col p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #CBD5E1 !important;
+  margin: 6px 0;
+}
+
+/* Lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  font-size: 13px;
+  color: #94A3B8 !important;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  color: #D4AF37 !important; /* Gold on hover */
+  transform: translateX(3px);
+}
+
+/* =========================================
+   NEWSLETTER
+   ========================================= */
+.newsletter {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  outline: none;
+  font-size: 13px;
+  background: #111827;
+  color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.newsletter input::placeholder {
+  color: #4b5563;
+}
+
+.newsletter input:focus {
+  border-color: #0F4C81 !important;
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.15);
+}
+
+.newsletter button {
+  background: #0F4C81 !important; /* Brand Blue */
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.newsletter button:hover {
+  background: #0A365C !important;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   BOTTOM BAR
+   ========================================= */
+.footer-bottom {
+  border-top: 1px solid #1f2937;
+  padding: 16px 40px; /* More compact */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12.5px;
+  color: #94A3B8 !important;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  color: #94A3B8 !important;
+  margin: 0;
+}
+
+.footer-bottom strong {
+  color: #FFFFFF !important;
+}
+
+.scroll-top-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scroll-top-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   RESPONSIVE LAYOUTS
+   ========================================= */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 0 24px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .newsletter {
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    padding: 16px 24px;
+    text-align: center;
+  }
+}
