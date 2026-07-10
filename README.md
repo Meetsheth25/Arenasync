@@ -119,7 +119,7 @@ SportSync Arena connects administrators, organizers, coaches, players, and spons
 
 ```
 react-clg-tournament-main/
-├── Fronted/                # React Client (Vite)
+├── Frontend/                # React Client (Vite)
 │   ├── public/             # Static public assets
 │   └── src/
 │       ├── adminside/      # Admin panels and system controllers
@@ -161,7 +161,7 @@ react-clg-tournament-main/
 
 3. **Install frontend dependencies**
    ```bash
-   cd ../Fronted
+   cd ../Frontend
    npm install
    ```
 
@@ -205,7 +205,7 @@ cp backend/.env.example backend/.env
 
 2. **Start the Vite client**
    ```bash
-   cd Fronted
+   cd Frontend
    npm run dev
    ```
    *Application available on `http://localhost:5173`.*
@@ -213,10 +213,10 @@ cp backend/.env.example backend/.env
 ### Production Build
 1. **Compile the React client**
    ```bash
-   cd Fronted
+   cd Frontend
    npm run build
    ```
-   *Outputs optimized assets in `Fronted/dist/`.*
+   *Outputs optimized assets in `Frontend/dist/`.*
 
 2. **Preview compilation locally**
    ```bash
