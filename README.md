@@ -2,9 +2,9 @@
 
 SportSync Arena is a secure, real-time sports tournament management system designed to coordinate collegiate athletics. It automates registration, brackets, payments, and notifications across multiple user tiers.
 
-[![Release](https://img.shields.io/badge/Release-v2.0-blue.svg?style=for-the-badge)](https://github.com/shethmit5-rgb/SI2.0)
+[![Release](https://img.shields.io/badge/Release-v2.0-blue.svg?style=for-the-badge)](https://github.com/Meetsheth25/Arenasync)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge)](https://github.com/shethmit5-rgb/SI2.0)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge)](https://github.com/Meetsheth25/Arenasync)
 
 [![React](https://img.shields.io/badge/React-18-blue?logo=react&logoColor=white&style=flat-square)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7-purple?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
@@ -118,7 +118,7 @@ SportSync Arena connects administrators, organizers, coaches, players, and spons
 ## Folder Structure
 
 ```
-react-clg-tournament-main/
+Arenasync/
 ├── Frontend/                # React Client (Vite)
 │   ├── public/             # Static public assets
 │   └── src/
@@ -149,8 +149,8 @@ react-clg-tournament-main/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/shethmit5-rgb/SI2.0.git
-   cd SI2.0
+   git clone https://github.com/Meetsheth25/Arenasync.git
+   cd Arenasync
    ```
 
 2. **Install backend dependencies**
@@ -196,14 +196,17 @@ cp backend/.env.example backend/.env
 ## Running
 
 ### Development
-1. **Start the backend server**
+
+Run the backend and frontend in separate terminal windows:
+
+1. **Start the backend server** (Terminal 1)
    ```bash
    cd backend
    npm start
    ```
    *Server boots on `http://localhost:5000`.*
 
-2. **Start the Vite client**
+2. **Start the Vite client** (Terminal 2)
    ```bash
    cd Frontend
    npm run dev
@@ -220,6 +223,7 @@ cp backend/.env.example backend/.env
 
 2. **Preview compilation locally**
    ```bash
+   cd Frontend
    npm run preview
    ```
 
