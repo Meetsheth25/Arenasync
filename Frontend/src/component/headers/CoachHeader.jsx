@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState, useRef } from "react";
 import api from "../../utils/axiosConfig";
 import socket from "../../utils/socket";
+import ConfirmActionModal from "../../components/ConfirmActionModal";
 
 export default function CoachHeader() {
   const { user, logout } = useAuth();
@@ -17,6 +18,8 @@ export default function CoachHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
@@ -109,6 +112,16 @@ export default function CoachHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const handleNotificationsCleared = () => {
+      setNotifications([]);
+    };
+    window.addEventListener("notificationsCleared", handleNotificationsCleared);
+    return () => {
+      window.removeEventListener("notificationsCleared", handleNotificationsCleared);
+    };
+  }, []);
+
   const handleLogout = () => {
     logout();
     setOpenProfile(false);
@@ -140,6 +153,22 @@ export default function CoachHeader() {
       try { await api.put(`/notifications/${n._id}`); } catch (err) { console.error(err); }
     }
     setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+  };
+
+  const handleClearAll = async () => {
+    if (isClearing) return;
+    setIsClearing(true);
+    try {
+      await api.delete("/notifications/clear-all");
+      setNotifications([]);
+      setShowClearConfirm(false);
+      window.dispatchEvent(new Event("notificationsCleared"));
+    } catch (err) {
+      console.error("Failed to clear notifications", err);
+      alert("Failed to clear notifications. Please try again.");
+    } finally {
+      setIsClearing(false);
+    }
   };
 
   const isActive = (path) => location.pathname === path;
@@ -227,7 +256,16 @@ export default function CoachHeader() {
           <div className="notif-popup" onClick={(e) => e.stopPropagation()} ref={notificationRef}>
             <div className="notif-header">
               <h3>🔔 Notifications</h3>
-              <div>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                {notifications.length > 0 && (
+                  <button 
+                    disabled={isClearing} 
+                    onClick={() => setShowClearConfirm(true)} 
+                    className="clear-all-btn-drawer"
+                  >
+                    Clear All
+                  </button>
+                )}
                 {notifications.some(n => !n.isRead) && (
                   <button onClick={markAllAsRead} className="mark-all-btn">Mark all read</button>
                 )}
@@ -247,6 +285,17 @@ export default function CoachHeader() {
           </div>
         </div>
       )}
+
+      <ConfirmActionModal
+        isOpen={showClearConfirm}
+        title="Clear all notifications?"
+        message="This will permanently remove all of your notifications."
+        confirmText="Clear All"
+        cancelText="Cancel"
+        onConfirm={handleClearAll}
+        onCancel={() => setShowClearConfirm(false)}
+        isLoading={isClearing}
+      />
     </>
   );
 }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import { getAdminPayments, adminOverridePayment } from "../services/paymentService";
 import { 
   RotateCw, 
@@ -35,10 +36,50 @@ export default function AdminPayments() {
   const [newStatus, setNewStatus] = useState("paid");
   const [submitting, setSubmitting] = useState(false);
   const [copiedId, setCopiedId] = useState(null);
+  const detailsScrollRef = useRef(null);
 
   useEffect(() => {
     loadPayments();
   }, []);
+
+  useEffect(() => {
+    if (selectedPayment || overridePayment) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedPayment, overridePayment]);
+
+  useEffect(() => {
+    if (!selectedPayment) return;
+
+    // Reset immediately if ref is already available
+    if (detailsScrollRef.current) {
+      detailsScrollRef.current.scrollTop = 0;
+    }
+
+    // Reset on next animation frame
+    const frameId = requestAnimationFrame(() => {
+      if (detailsScrollRef.current) {
+        detailsScrollRef.current.scrollTop = 0;
+      }
+    });
+
+    // Reset after a short timeout as a safe fallback
+    const timerId = setTimeout(() => {
+      if (detailsScrollRef.current) {
+        detailsScrollRef.current.scrollTop = 0;
+      }
+    }, 50);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      clearTimeout(timerId);
+    };
+  }, [selectedPayment]);
 
   const loadPayments = async () => {
     try {
@@ -677,7 +718,7 @@ export default function AdminPayments() {
         </div>
 
         {/* VIEW DETAILS MODAL */}
-        {selectedPayment && (
+        {selectedPayment && createPortal(
           <div className="modal-overlay-premium" onClick={() => setSelectedPayment(null)}>
             <div className="modal-container-premium" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header-premium">
@@ -690,7 +731,7 @@ export default function AdminPayments() {
                 </button>
               </div>
 
-              <div className="modal-body-premium">
+              <div ref={detailsScrollRef} className="modal-body-premium">
                 <div className="modal-grid-layout">
                   {/* Status Bar */}
                   <div className="modal-full-width-status">
@@ -909,11 +950,12 @@ export default function AdminPayments() {
                 </button>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
         {/* OVERRIDE STATUS POPUP */}
-        {overridePayment && (
+        {overridePayment && createPortal(
           <div className="popup-overlay-premium" onClick={handleCloseOverride}>
             <div className="popup-container-premium" onClick={(e) => e.stopPropagation()}>
               <div className="popup-header-premium">
@@ -987,7 +1029,8 @@ export default function AdminPayments() {
                 </button>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </main>
     </div>

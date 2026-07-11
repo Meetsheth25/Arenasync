@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState, useRef } from "react";
 import api from "../../utils/axiosConfig";
 import socket from "../../utils/socket";
+import ConfirmActionModal from "../../components/ConfirmActionModal";
 
 export default function PlayerHeader() {
   const { user, logout } = useAuth();
@@ -17,6 +18,8 @@ export default function PlayerHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
@@ -108,6 +111,16 @@ export default function PlayerHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const handleNotificationsCleared = () => {
+      setNotifications([]);
+    };
+    window.addEventListener("notificationsCleared", handleNotificationsCleared);
+    return () => {
+      window.removeEventListener("notificationsCleared", handleNotificationsCleared);
+    };
+  }, []);
+
   const handleLogout = () => {
     logout();
     setOpenProfile(false);
@@ -121,13 +134,6 @@ export default function PlayerHeader() {
       setNotifications(prev => prev.map(item =>
         item._id === n._id ? { ...item, isRead: true } : item
       ));
-      if (n.type === "join_request") {
-        navigate("/approve-players");
-        setOpenNotification(false);
-      } else if (n.type === "registration_approved") {
-        navigate("/my-registrations");
-        setOpenNotification(false);
-      }
     } catch (err) {
       console.error(err);
     }
@@ -141,6 +147,22 @@ export default function PlayerHeader() {
     setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
   };
 
+  const handleClearAll = async () => {
+    if (isClearing) return;
+    setIsClearing(true);
+    try {
+      await api.delete("/notifications/clear-all");
+      setNotifications([]);
+      setShowClearConfirm(false);
+      window.dispatchEvent(new Event("notificationsCleared"));
+    } catch (err) {
+      console.error("Failed to clear notifications", err);
+      alert("Failed to clear notifications. Please try again.");
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -148,7 +170,8 @@ export default function PlayerHeader() {
       <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
         {/* Logo */}
         <div className="logo" onClick={() => navigate("/")}>
-          🏆 ArenaSync
+          <span className="logo-icon">🏆</span>
+          <span className="logo-text">ArenaSync</span>
         </div>
 
         {/* Mobile Menu Button */}
@@ -158,30 +181,40 @@ export default function PlayerHeader() {
 
         {/* Navigation */}
         <nav className={mobileMenuOpen ? "mobile-open" : ""}>
-          {/* Player Main Links */}
           {playerNavLinks.main.map(link => (
             <Link key={link.path} to={link.path} className={isActive(link.path) ? "active" : ""}>
-              {link.icon} {link.label}
+              <span className="nav-icon">{link.icon}</span>{" "}
+              <span className="nav-label">{link.label}</span>
             </Link>
           ))}
-          {/* Player Dropdowns */}
+
+          {/* Player/User Dropdowns */}
           {Object.values(playerNavLinks.dropdowns).map((dropdown, idx) => (
             <div key={idx} className="nav-dropdown">
-              <span className="nav-link">{dropdown.icon} {dropdown.label} ▾</span>
+              <span className="nav-link">
+                <span className="nav-icon">{dropdown.icon}</span>{" "}
+                <span className="nav-label">{dropdown.label}</span>
+                <span className="nav-arrow"> ▾</span>
+              </span>
               <div className="dropdown-menu">
                 {dropdown.links.map(link => (
                   <Link key={link.path} to={link.path}>
-                    {link.icon && <span style={{ marginRight: "8px" }}>{link.icon}</span>}
-                    {link.label}
+                    <span className="nav-icon">{link.icon}</span>{" "}
+                    <span className="nav-label">{link.label}</span>
                   </Link>
                 ))}
               </div>
             </div>
           ))}
-          {/* Notifications Link (Mobile/Nav) */}
-          <Link to={playerNavLinks.notifications.path} className="notifications-link">
-            🔔 {playerNavLinks.notifications.label}
-            {unreadCount > 0 && <span className="notif-link-badge">{unreadCount}</span>}
+
+          {/* Mobile view notification link */}
+          <Link
+            to={playerNavLinks.notifications.path}
+            className={`notifications-link ${isActive(playerNavLinks.notifications.path) ? "active" : ""}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <span className="nav-icon">{playerNavLinks.notifications.icon}</span>{" "}
+            <span className="nav-label">{playerNavLinks.notifications.label}</span>
           </Link>
         </nav>
 
@@ -226,7 +259,16 @@ export default function PlayerHeader() {
           <div className="notif-popup" onClick={(e) => e.stopPropagation()} ref={notificationRef}>
             <div className="notif-header">
               <h3>🔔 Notifications</h3>
-              <div>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                {notifications.length > 0 && (
+                  <button 
+                    disabled={isClearing} 
+                    onClick={() => setShowClearConfirm(true)} 
+                    className="clear-all-btn-drawer"
+                  >
+                    Clear All
+                  </button>
+                )}
                 {notifications.some(n => !n.isRead) && (
                   <button onClick={markAllAsRead} className="mark-all-btn">Mark all read</button>
                 )}
@@ -246,6 +288,17 @@ export default function PlayerHeader() {
           </div>
         </div>
       )}
+
+      <ConfirmActionModal
+        isOpen={showClearConfirm}
+        title="Clear all notifications?"
+        message="This will permanently remove all of your notifications."
+        confirmText="Clear All"
+        cancelText="Cancel"
+        onConfirm={handleClearAll}
+        onCancel={() => setShowClearConfirm(false)}
+        isLoading={isClearing}
+      />
     </>
   );
 }

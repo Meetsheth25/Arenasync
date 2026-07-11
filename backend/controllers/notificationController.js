@@ -35,3 +35,16 @@ exports.deleteNotification = async (req, res, next) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// CLEAR ALL notifications
+exports.clearAllNotifications = async (req, res, next) => {
+  try {
+    await Notification.deleteMany({
+      userId: req.user.userId,
+    });
+    res.json({ message: "All notifications cleared" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+

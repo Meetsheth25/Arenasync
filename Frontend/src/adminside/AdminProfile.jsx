@@ -220,7 +220,7 @@ export default function AdminProfile() {
         <div className="glass-panel" style={{ padding: "20px", marginBottom: "20px" }}>
           <h3>⚙️ Quick Actions</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "15px" }}>
-            <a href="/admin" className="edit-profile-btn" style={{ textAlign: "center", textDecoration: "none" }}>📊 Admin Dashboard</a>
+            <a href="/admin/dashboard" className="edit-profile-btn" style={{ textAlign: "center", textDecoration: "none" }}>📊 Admin Dashboard</a>
             <a href="/admin/users" className="edit-profile-btn" style={{ textAlign: "center", textDecoration: "none" }}>👥 Manage Users</a>
             <a href="/admin/venues" className="edit-profile-btn" style={{ textAlign: "center", textDecoration: "none" }}>🏆 Manage Venues</a>
           </div>

@@ -4,12 +4,15 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../static/Notifications.css";
 import SkeletonList from "../components/loading/SkeletonList";
+import ConfirmActionModal from "../components/ConfirmActionModal";
 
 export default function Notifications() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -18,6 +21,16 @@ export default function Notifications() {
     }
     fetchNotifications();
   }, [user]);
+
+  useEffect(() => {
+    const handleNotificationsCleared = () => {
+      setNotifications([]);
+    };
+    window.addEventListener("notificationsCleared", handleNotificationsCleared);
+    return () => {
+      window.removeEventListener("notificationsCleared", handleNotificationsCleared);
+    };
+  }, []);
 
   const fetchNotifications = async () => {
     try {
@@ -59,6 +72,22 @@ export default function Notifications() {
     }
   };
 
+  const handleClearAll = async () => {
+    if (isClearing) return;
+    setIsClearing(true);
+    try {
+      await api.delete("/notifications/clear-all");
+      setNotifications([]);
+      setShowClearConfirm(false);
+      window.dispatchEvent(new Event("notificationsCleared"));
+    } catch (err) {
+      console.error("Failed to clear notifications", err);
+      alert("Failed to clear notifications. Please try again.");
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="notifications-page">
@@ -75,11 +104,21 @@ export default function Notifications() {
     <div className="notifications-page">
       <div className="notifications-header">
         <h1>🔔 Notifications</h1>
-        {notifications.some(n => !n.isRead) && (
-          <button onClick={markAllAsRead} className="mark-all-btn">
-            Mark All as Read
-          </button>
-        )}
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          {notifications.length > 0 && (
+            <button
+              onClick={() => setShowClearConfirm(true)}
+              className="clear-all-btn-page"
+            >
+              Clear All
+            </button>
+          )}
+          {notifications.some(n => !n.isRead) && (
+            <button onClick={markAllAsRead} className="mark-all-btn">
+              Mark All as Read
+            </button>
+          )}
+        </div>
       </div>
 
       {notifications.length === 0 ? (
@@ -111,6 +150,17 @@ export default function Notifications() {
           ))}
         </div>
       )}
+
+      <ConfirmActionModal
+        isOpen={showClearConfirm}
+        title="Clear all notifications?"
+        message="This will permanently remove all of your notifications."
+        confirmText="Clear All"
+        cancelText="Cancel"
+        onConfirm={handleClearAll}
+        onCancel={() => setShowClearConfirm(false)}
+        isLoading={isClearing}
+      />
     </div>
   );
 }

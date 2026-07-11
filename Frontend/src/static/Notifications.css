@@ -241,3 +241,20 @@
     color: #6b7280;
   }
 }
+
+.clear-all-btn-page {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+  border: 1.5px solid #dc2626 !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s !important;
+}
+
+.clear-all-btn-page:hover {
+  background: #dc2626 !important;
+  color: white !important;
+}

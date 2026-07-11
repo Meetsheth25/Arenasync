@@ -768,3 +768,24 @@
     padding: 0 6px !important;
   }
 }
+
+.clear-all-btn-drawer {
+  background: transparent !important;
+  border: none !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--danger, #dc2626) !important;
+  cursor: pointer !important;
+  margin-right: 12px !important;
+  transition: all 0.2s !important;
+}
+
+.clear-all-btn-drawer:hover {
+  text-decoration: underline !important;
+  opacity: 0.9 !important;
+}
+
+.clear-all-btn-drawer:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}

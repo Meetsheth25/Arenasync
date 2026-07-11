@@ -682,8 +682,8 @@ export default function MyTeamDashboard() {
           <h2>⚙️ Configure Player Joining Fee</h2>
           <p className="db-card-sub" style={{ marginBottom: "12px" }}>Set the entry fee for players joining your captained teams.</p>
           <div className="fee-config-form">
-            <select 
-              value={selectedTeamId} 
+            <select
+              value={selectedTeamId}
               onChange={(e) => {
                 const teamId = e.target.value;
                 setSelectedTeamId(teamId);
@@ -698,14 +698,14 @@ export default function MyTeamDashboard() {
                 </option>
               ))}
             </select>
-            <input 
-              type="number" 
-              value={editFeeVal} 
-              onChange={(e) => setEditFeeVal(e.target.value)} 
+            <input
+              type="number"
+              value={editFeeVal}
+              onChange={(e) => setEditFeeVal(e.target.value)}
               placeholder="Joining Fee (₹)"
               min="0"
             />
-            <button 
+            <button
               onClick={handleSaveDashboardFee}
               disabled={actionLoading === selectedTeamId || !selectedTeamId}
             >
@@ -886,12 +886,7 @@ export default function MyTeamDashboard() {
         >
           📊 Dashboard Analytics
         </button>
-        <button
-          className={`tab-btn ${activeTab === "captain" ? "active" : ""}`}
-          onClick={() => setActiveTab("captain")}
-        >
-          👑 Teams I Captain ({teamsAsCaptain.length})
-        </button>
+
         <button
           className={`tab-btn ${activeTab === "player" ? "active" : ""}`}
           onClick={() => setActiveTab("player")}
@@ -913,7 +908,7 @@ export default function MyTeamDashboard() {
             {renderDashboardAnalytics()}
           </motion.div>
         ) : activeTab === "captain" ? (
-          <motion.div 
+          <motion.div
             key="captain-view"
             className="captain-view"
             variants={listReveal}
@@ -1018,7 +1013,7 @@ export default function MyTeamDashboard() {
                             <span className="stat-value rejected-count">{rejectedPlayers.length}</span>
                           </div>
                         )}
-                         <div className="stat-item" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <div className="stat-item" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                           <span className="stat-label">💰 Player Joining Fee:</span>
                           {editingFee === team._id ? (
                             <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
@@ -1029,13 +1024,13 @@ export default function MyTeamDashboard() {
                                 min="0"
                                 style={{ width: "80px", padding: "2px 5px", borderRadius: "4px", border: "1px solid #ccc", color: "#000" }}
                               />
-                              <button 
+                              <button
                                 onClick={() => handleUpdateFee(team._id)}
                                 style={{ padding: "2px 8px", backgroundColor: "#10b981", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer", fontSize: "12px" }}
                               >
                                 Save
                               </button>
-                              <button 
+                              <button
                                 onClick={() => setEditingFee(null)}
                                 style={{ padding: "2px 8px", backgroundColor: "#ef4444", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer", fontSize: "12px" }}
                               >
@@ -1082,7 +1077,7 @@ export default function MyTeamDashboard() {
                         <Link to={`/teams/edit/${team._id}`} className="edit-team-btn light-sweep-wrapper">
                           ✏️ Edit Team
                         </Link>
-                        <button 
+                        <button
                           onClick={() => handleDeleteTeam(team._id, team.teamName)}
                           className="delete-team-btn light-sweep-wrapper"
                         >
@@ -1104,7 +1099,7 @@ export default function MyTeamDashboard() {
             )}
           </motion.div>
         ) : (
-          <motion.div 
+          <motion.div
             key="player-view"
             className="player-view"
             variants={listReveal}
@@ -1116,25 +1111,25 @@ export default function MyTeamDashboard() {
                 const isCaptain = team.captainId?._id === currentUserId;
                 const playerData = team.players?.find((p) => p.userId?._id === currentUserId);
                 const playerStatus = isCaptain ? "captain" : playerData?.status;
-                
+
                 const player = playerData || {};
                 console.log("Player Status:", player.status);
                 console.log("Payment Status:", player.paymentStatus);
                 console.log("Joining Fee:", team.playerJoiningFee);
-                
+
                 const getStatusInfo = () => {
-                  switch(playerStatus) {
+                  switch (playerStatus) {
                     case "captain":
                       return { icon: "👑", text: "Captain", color: "#2563EB", bg: "#EFF6FF" };
                     case "approved_pending_payment":
                       return { icon: "💳", text: "Approved (Pending Payment)", color: "#ef4444", bg: "#fee2e2" };
-                    case "approved": 
+                    case "approved":
                       return { icon: "✅", text: "Approved", color: "#10b981", bg: "#dcfce7" };
-                    case "pending": 
+                    case "pending":
                       return { icon: "⏳", text: "Pending Approval", color: "#f59e0b", bg: "#fef3c7" };
-                    case "rejected": 
+                    case "rejected":
                       return { icon: "❌", text: "Rejected", color: "#ef4444", bg: "#fee2e2" };
-                    default: 
+                    default:
                       return { icon: "❓", text: "Unknown", color: "#6b7280", bg: "#f3f4f6" };
                   }
                 };
@@ -1175,7 +1170,7 @@ export default function MyTeamDashboard() {
                         </div>
                       )}
 
-                       {playerStatus === "approved_pending_payment" && player.paymentStatus === "unpaid" && (
+                      {playerStatus === "approved_pending_payment" && player.paymentStatus === "unpaid" && (
                         <div className="pending-payment-warning" style={{ border: "1px dashed #ef4444", padding: "12px", borderRadius: "6px", marginBottom: "10px", backgroundColor: "#fff5f5" }}>
                           <div style={{ color: "#333", fontSize: "14px", marginBottom: "6px" }}>
                             <strong>Joining Fee:</strong> ₹{team.playerJoiningFee}
@@ -1218,7 +1213,7 @@ export default function MyTeamDashboard() {
                           </button>
                         )}
                         {playerStatus === "pending" && (
-                          <button 
+                          <button
                             onClick={() => handleLeaveTeam(team._id, team.teamName)}
                             className="leave-btn light-sweep-wrapper"
                           >
@@ -1226,7 +1221,7 @@ export default function MyTeamDashboard() {
                           </button>
                         )}
                         {(playerStatus === "approved" || playerStatus === "approved_pending_payment") && (
-                          <button 
+                          <button
                             onClick={() => handleLeaveTeam(team._id, team.teamName)}
                             className="leave-btn light-sweep-wrapper"
                           >
