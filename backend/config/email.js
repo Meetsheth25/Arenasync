@@ -21,11 +21,11 @@ transporter.verify((error, success) => {
 // Validate and send via Brevo Transactional Email REST API
 const sendBrevoTransactionalEmail = async ({ to, subject, htmlContent, textContent }) => {
   const apiKey = process.env.BREVO_API_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || process.env.EMAIL_FROM || process.env.EMAIL_USER;
   const senderName = process.env.BREVO_SENDER_NAME || "ArenaSync";
 
   if (!apiKey || !senderEmail) {
-    throw new Error("Brevo OTP email service is not configured");
+    throw new Error("Brevo OTP email service is not configured (missing api key or sender email)");
   }
 
   const payload = {
