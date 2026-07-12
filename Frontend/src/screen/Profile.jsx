@@ -368,7 +368,12 @@ export default function Profile() {
     const content3Col = {
       center: (
         <div className="profile-center-flow">
-          <ProfileStatsCard role={role} statsData={dashboardData} />
+          {role === "organizer" && activeTab === "overview" && (
+            <ProfileStatsCard role={role} statsData={dashboardData} />
+          )}
+          {role === "coach" && activeTab === "overview" && (
+            <ProfileStatsCard role={role} statsData={dashboardData} />
+          )}
           
           <Suspense fallback={<div className="glass-card skeleton-loader" style={{ height: "300px" }}></div>}>
             {role === "organizer" && (

@@ -333,15 +333,15 @@ export default function ProfileInfoCard({
       <div className="security-settings-section">
         <h3>🔐 Security</h3>
         <div className="security-actions-row">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="change-password-btn-premium"
             onClick={() => setShowPasswordModal(true)}
           >
             Change Password
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="deactivate-account-btn-premium"
             onClick={handleDelete}
           >

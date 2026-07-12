@@ -48,8 +48,12 @@ export default function PlayerProfileContent({
 
     case "performance":
       return (
-        <div className="tab-pane-content">
-          <ProfileStatsCard role="player" statsData={dashboardData} />
+        <div className="tab-pane-content glass-panel">
+          <h3>📊 Performance Analytics</h3>
+          <div className="timeline-empty-state glass-card">
+            <span className="empty-state-icon">📈</span>
+            <p>Detailed performance analytics will be available after more matches are recorded.</p>
+          </div>
         </div>
       );
 

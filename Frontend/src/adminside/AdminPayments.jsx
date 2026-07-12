@@ -1,23 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { getAdminPayments, adminOverridePayment } from "../services/paymentService";
-import { 
-  RotateCw, 
-  Search, 
-  Eye, 
-  Edit, 
-  Copy, 
-  Check, 
-  IndianRupee, 
-  Clock, 
-  CheckCircle2, 
-  AlertCircle, 
-  XCircle, 
-  Trophy, 
-  Users, 
-  Award, 
-  CreditCard, 
-  User, 
+import {
+  RotateCw,
+  Search,
+  Eye,
+  Edit,
+  Copy,
+  Check,
+  IndianRupee,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  XCircle,
+  Trophy,
+  Users,
+  Award,
+  CreditCard,
+  User,
   Sparkles,
   Shield,
   Calendar,
@@ -284,7 +284,7 @@ export default function AdminPayments() {
     const userEmail = (p.userId?.email || "").toLowerCase();
     const orderId = (p.razorpayOrderId || "").toLowerCase();
     const paymentId = (p.razorpayPaymentId || "").toLowerCase();
-    const matchesSearch = 
+    const matchesSearch =
       userName.includes(searchLower) ||
       userEmail.includes(searchLower) ||
       orderId.includes(searchLower) ||
@@ -317,15 +317,15 @@ export default function AdminPayments() {
   return (
     <div className="admin-payments-page">
       <main className="content">
-        
+
         {/* HEADER SECTION */}
         <div className="admin-header-row">
           <div>
             <h1>💳 Payments Management</h1>
             <p className="admin-subtitle">Monitor, search and manage all payment transactions.</p>
           </div>
-          <button 
-            onClick={loadPayments} 
+          <button
+            onClick={loadPayments}
             className="refresh-btn-premium light-sweep-wrapper"
             aria-label="Refresh Payments Data"
             disabled={loading}
@@ -459,12 +459,12 @@ export default function AdminPayments() {
 
             <div className="filter-item-premium">
               <label htmlFor="status-filter">Status</label>
-              <select 
-                id="status-filter" 
-                value={statusFilter} 
+              <select
+                id="status-filter"
+                value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="all">All Statuses</option>
+                <option value="all">All Status</option>
                 <option value="paid">Paid</option>
                 <option value="pending">Pending</option>
                 <option value="failed">Failed</option>
@@ -474,9 +474,9 @@ export default function AdminPayments() {
 
             <div className="filter-item-premium">
               <label htmlFor="type-filter">Payment Type</label>
-              <select 
-                id="type-filter" 
-                value={typeFilter} 
+              <select
+                id="type-filter"
+                value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
               >
                 <option value="all">All Types</option>
@@ -555,8 +555,8 @@ export default function AdminPayments() {
                       <tr key={p._id || Math.random()} className="table-body-row-premium">
                         <td>
                           <div className="user-profile-cell">
-                            <div 
-                              className="avatar-initials-wrapper" 
+                            <div
+                              className="avatar-initials-wrapper"
                               style={{ background: getAvatarGradient(p.userId?.name) }}
                             >
                               {getInitials(p.userId?.name)}
@@ -770,8 +770,8 @@ export default function AdminPayments() {
                     </div>
                     <div className="info-card-body">
                       <div className="user-avatar-row-modal">
-                        <div 
-                          className="modal-avatar-initials" 
+                        <div
+                          className="modal-avatar-initials"
                           style={{ background: getAvatarGradient(selectedPayment.userId?.name) }}
                         >
                           {getInitials(selectedPayment.userId?.name)}
@@ -962,7 +962,7 @@ export default function AdminPayments() {
                 <h2>Override Payment Status</h2>
                 <button type="button" className="popup-close-x" onClick={handleCloseOverride}>×</button>
               </div>
-              
+
               <div className="popup-body-premium">
                 <div className="override-warning-box-premium">
                   <div className="warning-icon-wrapper">
@@ -976,12 +976,12 @@ export default function AdminPayments() {
 
                 <div className="popup-field-premium">
                   <label htmlFor="override-txn-id">Transaction System ID</label>
-                  <input 
+                  <input
                     id="override-txn-id"
-                    type="text" 
-                    value={overridePayment._id} 
-                    disabled 
-                    className="disabled-input-premium" 
+                    type="text"
+                    value={overridePayment._id}
+                    disabled
+                    className="disabled-input-premium"
                   />
                 </div>
 
@@ -997,9 +997,9 @@ export default function AdminPayments() {
 
                 <div className="popup-field-premium">
                   <label htmlFor="new-override-status">New Override Status</label>
-                  <select 
+                  <select
                     id="new-override-status"
-                    value={newStatus} 
+                    value={newStatus}
                     onChange={(e) => setNewStatus(e.target.value)}
                   >
                     <option value="paid">✅ Paid (Completes action / creates entity)</option>
@@ -1011,18 +1011,18 @@ export default function AdminPayments() {
               </div>
 
               <div className="popup-footer-premium">
-                <button 
-                  type="button" 
-                  className="popup-cancel-btn-premium" 
-                  onClick={handleCloseOverride} 
+                <button
+                  type="button"
+                  className="popup-cancel-btn-premium"
+                  onClick={handleCloseOverride}
                   disabled={submitting}
                 >
                   Cancel
                 </button>
-                <button 
-                  type="button" 
-                  className="popup-save-btn-premium" 
-                  onClick={handleSaveOverride} 
+                <button
+                  type="button"
+                  className="popup-save-btn-premium"
+                  onClick={handleSaveOverride}
                   disabled={submitting}
                 >
                   {submitting ? "Saving changes..." : "Save Override State"}

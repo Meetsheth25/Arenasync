@@ -17,7 +17,7 @@ export default function TeamsList() {
     status: "all",
     search: ""
   });
-  
+
 
   useEffect(() => {
     fetchTeams();
@@ -83,7 +83,7 @@ export default function TeamsList() {
           onChange={(e) => setFilters({ ...filters, search: e.target.value })}
           className="search-input"
         />
-        
+
         <select
           value={filters.tournament}
           onChange={(e) => setFilters({ ...filters, tournament: e.target.value })}
@@ -108,7 +108,7 @@ export default function TeamsList() {
           value={filters.status}
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
         >
-          <option value="all">All Statuses</option>
+          <option value="all">All Status</option>
           <option value="upcoming">Upcoming</option>
           <option value="ongoing">Ongoing</option>
           <option value="completed">Completed</option>
@@ -131,7 +131,7 @@ export default function TeamsList() {
                   <h3>{team.teamName}</h3>
                   <span className="team-sport">{team.sportId?.name}</span>
                 </div>
-                
+
                 <div className="team-info">
                   <p><strong>Captain:</strong> {team.captainId?.name}</p>
                   <p><strong>Tournament:</strong> {team.tournamentId?.eventName}</p>

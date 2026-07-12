@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import axios from "axios";
 import "./AdminDashboard.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
@@ -21,6 +22,18 @@ export default function SportManagement() {
   useEffect(() => {
     fetchSports();
   }, []);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (!showModal) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showModal]);
 
   const fetchSports = async () => {
     try {
@@ -180,7 +193,7 @@ export default function SportManagement() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 1000,
+    zIndex: 10000,
   };
 
   const modalStyle = {
@@ -189,6 +202,8 @@ export default function SportManagement() {
     borderRadius: "12px",
     width: "450px",
     maxWidth: "90%",
+    maxHeight: "calc(100dvh - 32px)",
+    overflowY: "auto",
   };
 
   if (loading) {
@@ -279,7 +294,7 @@ export default function SportManagement() {
       </main>
 
       {/* Add/Edit Modal */}
-      {showModal && (
+      {showModal && createPortal(
         <div style={modalOverlayStyle} onClick={() => setShowModal(false)}>
           <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
@@ -348,7 +363,8 @@ export default function SportManagement() {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
