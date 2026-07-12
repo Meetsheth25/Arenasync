@@ -12,6 +12,17 @@ export default function SponsorHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const profileRef = useRef(null);
+  const mobileNavRef = useRef(null);
+
+  useEffect(() => {
+    if (mobileMenuOpen && mobileNavRef.current) {
+      requestAnimationFrame(() => {
+        if (mobileNavRef.current) {
+          mobileNavRef.current.scrollTop = 0;
+        }
+      });
+    }
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -50,7 +61,7 @@ export default function SponsorHeader() {
       </div>
 
       {/* Navigation - Sponsor should have only: Home, Events, Profile */}
-      <nav className={mobileMenuOpen ? "mobile-open" : ""}>
+      <nav ref={mobileNavRef} className={mobileMenuOpen ? "mobile-open" : ""}>
         <Link to="/" className={isActive("/") ? "active" : ""}>
           🏠 Home
         </Link>

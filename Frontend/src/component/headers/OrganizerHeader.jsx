@@ -22,7 +22,30 @@ export default function OrganizerHeader() {
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
+  const mobileNavRef = useRef(null);
   const unreadCount = notifications.filter(n => !n.isRead).length;
+
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
+
+  const toggleMobileDropdown = (groupKey) => {
+    setOpenMobileDropdown(prev => prev === groupKey ? null : groupKey);
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setOpenMobileDropdown(null);
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen && mobileNavRef.current) {
+      requestAnimationFrame(() => {
+        if (mobileNavRef.current) {
+          mobileNavRef.current.scrollTop = 0;
+        }
+      });
+    }
+  }, [mobileMenuOpen]);
 
   // Navigation links configured directly in render
 
@@ -127,15 +150,17 @@ export default function OrganizerHeader() {
         </div>
 
         {/* Navigation */}
-        <nav className={mobileMenuOpen ? "mobile-open" : ""}>
+        <nav ref={mobileNavRef} className={mobileMenuOpen ? "mobile-open" : ""}>
           {/* Dashboard */}
           <Link to="/organizer/dashboard" className={`nav-link ${isActive("/organizer/dashboard") ? "active" : ""}`}>
             📊 Dashboard
           </Link>
 
           {/* Tournaments Dropdown */}
-          <div className="nav-dropdown">
-            <span className="nav-link">🏆 Tournaments ▾</span>
+          <div className={`nav-dropdown ${openMobileDropdown === "tournaments" ? "mobile-dropdown-open" : ""}`}>
+            <span className="nav-link" onClick={() => toggleMobileDropdown("tournaments")}>
+              🏆 Tournaments {openMobileDropdown === "tournaments" ? "▴" : "▾"}
+            </span>
             <div className="dropdown-menu">
               <Link to="/my-tournaments">📋 My Tournaments</Link>
               <Link to="/create-tournament">✨ Create Tournament</Link>
@@ -149,8 +174,10 @@ export default function OrganizerHeader() {
           </Link>
 
           {/* Matches Dropdown */}
-          <div className="nav-dropdown">
-            <span className="nav-link">⚽ Matches ▾</span>
+          <div className={`nav-dropdown ${openMobileDropdown === "matches" ? "mobile-dropdown-open" : ""}`}>
+            <span className="nav-link" onClick={() => toggleMobileDropdown("matches")}>
+              ⚽ Matches {openMobileDropdown === "matches" ? "▴" : "▾"}
+            </span>
             <div className="dropdown-menu">
               <Link to="/organizer/matches/list">📋 Match List</Link>
               <Link to="/organizer/matches">📅 Create Match / Manage Matches</Link>

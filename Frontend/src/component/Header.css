@@ -661,49 +661,141 @@
 
   .navbar nav {
     position: fixed !important;
-    top: 96px !important;
-    /* Align to bottom of the floating navbar */
+    top: 112px !important;
+    /* Align below the floating navbar */
     left: -100% !important;
     width: 280px !important;
-    height: calc(100vh - 112px) !important;
+    max-height: calc(100dvh - 128px) !important;
+    height: auto !important;
     background: var(--surface) !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 24px !important;
-    gap: 12px !important;
-    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    padding: 24px 16px !important;
+    gap: 8px !important;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
     z-index: 1000 !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overflow-anchor: none !important;
     box-shadow: var(--shadow-lg) !important;
     border: 1px solid var(--border) !important;
     border-radius: 16px !important;
     margin: 0 !important;
     flex: none !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(15, 76, 129, 0.2) transparent !important;
+  }
+
+  :root[data-theme="dark"] .navbar nav {
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent !important;
+  }
+
+  /* Subtle Custom Scrollbar for Mobile Navigation Drawer */
+  .navbar nav::-webkit-scrollbar {
+    width: 5px !important;
+  }
+
+  .navbar nav::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  .navbar nav::-webkit-scrollbar-thumb {
+    background: rgba(15, 76, 129, 0.2) !important;
+    border-radius: 10px !important;
+  }
+
+  :root[data-theme="dark"] .navbar nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .navbar nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(15, 76, 129, 0.4) !important;
   }
 
   .navbar nav.mobile-open {
     left: 16px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
     /* Stay inside floating viewport margin */
   }
 
   .navbar nav a,
-  .navbar nav .nav-dropdown {
+  .navbar nav .nav-link {
     width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     justify-content: flex-start !important;
     height: 44px !important;
+    white-space: normal !important;
+    gap: 8px !important;
+  }
+
+  .navbar nav .nav-dropdown {
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
 
   .dropdown-menu {
     position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
     transform: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important; /* Start collapsed */
     box-shadow: none !important;
-    padding-left: 16px !important;
-    margin-top: 6px !important;
-    display: block !important;
+    padding: 0 0 0 16px !important;
+    margin: 4px 0 0 0 !important;
+    flex-direction: column !important;
+    gap: 4px !important;
     border: none !important;
     background: transparent !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .navbar nav .nav-dropdown.mobile-dropdown-open .dropdown-menu {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Neutralize desktop hover dropdowns inside the mobile view */
+  .navbar nav .nav-dropdown:hover .dropdown-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
+  }
+
+  .navbar nav .nav-dropdown.mobile-dropdown-open:hover .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+  }
+
+  .dropdown-menu a {
+    height: 38px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+    padding: 0 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  :root[data-theme="dark"] .dropdown-menu a {
+    color: #94A3B8 !important;
   }
 
   .nav-actions {

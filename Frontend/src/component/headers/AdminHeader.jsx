@@ -22,7 +22,30 @@ export default function AdminHeader() {
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
+  const mobileNavRef = useRef(null);
   const unreadCount = notifications.filter(n => !n.isRead).length;
+
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
+
+  const toggleMobileDropdown = (groupKey) => {
+    setOpenMobileDropdown(prev => prev === groupKey ? null : groupKey);
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setOpenMobileDropdown(null);
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen && mobileNavRef.current) {
+      requestAnimationFrame(() => {
+        if (mobileNavRef.current) {
+          mobileNavRef.current.scrollTop = 0;
+        }
+      });
+    }
+  }, [mobileMenuOpen]);
 
   const adminNavLinks = {
     main: [
@@ -181,7 +204,7 @@ export default function AdminHeader() {
         </div>
 
         {/* Navigation */}
-        <nav className={mobileMenuOpen ? "mobile-open" : ""}>
+        <nav ref={mobileNavRef} className={mobileMenuOpen ? "mobile-open" : ""}>
           {adminNavLinks.main.map(link => (
             <Link key={link.path} to={link.path} className={isActive(link.path) ? "active" : ""}>
               <span className="nav-icon">{link.icon}</span>{" "}
@@ -189,12 +212,15 @@ export default function AdminHeader() {
             </Link>
           ))}
           {/* Admin Dropdowns */}
-          {Object.values(adminNavLinks.dropdowns).map((dropdown, idx) => (
-            <div key={idx} className="nav-dropdown">
-              <span className="nav-link">
+          {Object.entries(adminNavLinks.dropdowns).map(([groupKey, dropdown]) => (
+            <div
+              key={groupKey}
+              className={`nav-dropdown ${openMobileDropdown === groupKey ? "mobile-dropdown-open" : ""}`}
+            >
+              <span className="nav-link" onClick={() => toggleMobileDropdown(groupKey)}>
                 <span className="nav-icon">{dropdown.icon}</span>{" "}
                 <span className="nav-label">{dropdown.label}</span>
-                <span className="nav-arrow"> ▾</span>
+                <span className="nav-arrow">{openMobileDropdown === groupKey ? " ▴" : " ▾"}</span>
               </span>
               <div className="dropdown-menu">
                 {dropdown.links.map(link => (

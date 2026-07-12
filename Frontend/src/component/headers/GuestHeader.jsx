@@ -1,6 +1,6 @@
 import "../Header.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function GuestHeader() {
   const location = useLocation();
@@ -8,6 +8,29 @@ export default function GuestHeader() {
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileNavRef = useRef(null);
+
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
+
+  const toggleMobileDropdown = (groupKey) => {
+    setOpenMobileDropdown(prev => prev === groupKey ? null : groupKey);
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setOpenMobileDropdown(null);
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen && mobileNavRef.current) {
+      requestAnimationFrame(() => {
+        if (mobileNavRef.current) {
+          mobileNavRef.current.scrollTop = 0;
+        }
+      });
+    }
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -63,7 +86,7 @@ export default function GuestHeader() {
       </div>
 
       {/* Navigation */}
-      <nav className={mobileMenuOpen ? "mobile-open" : ""}>
+      <nav ref={mobileNavRef} className={mobileMenuOpen ? "mobile-open" : ""}>
         {/* Main Links */}
         {guestNavLinks.main.map(link => (
           <Link key={link.path} to={link.path} className={isActive(link.path) ? "active" : ""}>
@@ -71,9 +94,14 @@ export default function GuestHeader() {
           </Link>
         ))}
         {/* Dropdowns */}
-        {Object.values(guestNavLinks.dropdowns).map((dropdown, idx) => (
-          <div key={idx} className="nav-dropdown">
-            <span className="nav-link">{dropdown.icon} {dropdown.label} ▾</span>
+        {Object.entries(guestNavLinks.dropdowns).map(([groupKey, dropdown]) => (
+          <div
+            key={groupKey}
+            className={`nav-dropdown ${openMobileDropdown === groupKey ? "mobile-dropdown-open" : ""}`}
+          >
+            <span className="nav-link" onClick={() => toggleMobileDropdown(groupKey)}>
+              {dropdown.icon} {dropdown.label} {openMobileDropdown === groupKey ? "▴" : "▾"}
+            </span>
             <div className="dropdown-menu">
               {dropdown.links.map(link => (
                 <Link key={link.path} to={link.path}>

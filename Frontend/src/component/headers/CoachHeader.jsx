@@ -23,7 +23,30 @@ export default function CoachHeader() {
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
+  const mobileNavRef = useRef(null);
   const unreadCount = notifications.filter(n => !n.isRead).length;
+
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
+
+  const toggleMobileDropdown = (groupKey) => {
+    setOpenMobileDropdown(prev => prev === groupKey ? null : groupKey);
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setOpenMobileDropdown(null);
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen && mobileNavRef.current) {
+      requestAnimationFrame(() => {
+        if (mobileNavRef.current) {
+          mobileNavRef.current.scrollTop = 0;
+        }
+      });
+    }
+  }, [mobileMenuOpen]);
 
   const coachNavLinks = {
     main: [
@@ -187,7 +210,7 @@ export default function CoachHeader() {
         </div>
 
         {/* Navigation */}
-        <nav className={mobileMenuOpen ? "mobile-open" : ""}>
+        <nav ref={mobileNavRef} className={mobileMenuOpen ? "mobile-open" : ""}>
           {/* Coach Main Links */}
           {coachNavLinks.main.map(link => (
             <Link key={link.path} to={link.path} className={isActive(link.path) ? "active" : ""}>
@@ -195,9 +218,14 @@ export default function CoachHeader() {
             </Link>
           ))}
           {/* Coach Dropdowns */}
-          {Object.values(coachNavLinks.dropdowns).map((dropdown, idx) => (
-            <div key={idx} className="nav-dropdown">
-              <span className="nav-link">{dropdown.icon} {dropdown.label} ▾</span>
+          {Object.entries(coachNavLinks.dropdowns).map(([groupKey, dropdown]) => (
+            <div
+              key={groupKey}
+              className={`nav-dropdown ${openMobileDropdown === groupKey ? "mobile-dropdown-open" : ""}`}
+            >
+              <span className="nav-link" onClick={() => toggleMobileDropdown(groupKey)}>
+                {dropdown.icon} {dropdown.label} {openMobileDropdown === groupKey ? "▴" : "▾"}
+              </span>
               <div className="dropdown-menu">
                 {dropdown.links.map(link => (
                   <Link key={link.path} to={link.path}>
