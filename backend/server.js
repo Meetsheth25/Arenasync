@@ -14,6 +14,7 @@ const server = http.createServer(app);
 /* ================= CORS CONFIGURATION ================= */
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://arenasync-tau.vercel.app",
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
