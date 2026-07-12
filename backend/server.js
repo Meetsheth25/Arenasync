@@ -17,13 +17,28 @@ const allowedOrigins = [
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
+// Log allowed origins at startup for diagnostic purposes
+console.log(`[CORS] Allowed origins: ${JSON.stringify(allowedOrigins)}`);
+
+// Helper to normalize origin strings for robust comparison (trim, remove trailing slash, lowercase)
+const normalizeOrigin = (url) => {
+  if (!url) return "";
+  return String(url).trim().replace(/\/$/, "").toLowerCase();
+};
+
 const corsOptionsOrigin = (origin, callback) => {
   // Allow requests with no origin (like server-to-server or curl requests)
   if (!origin) return callback(null, true);
-  if (allowedOrigins.includes(origin)) {
+
+  const cleanOrigin = normalizeOrigin(origin);
+  const isAllowed = allowedOrigins.some(allowed => normalizeOrigin(allowed) === cleanOrigin);
+
+  if (isAllowed) {
     callback(null, true);
   } else {
-    callback(new Error("Not allowed by CORS"));
+    // Log the rejected origin safely for diagnostics
+    console.log(`[CORS] Rejected CORS origin: ${origin}`);
+    callback(null, false); // Safely reject without throwing a 500 error in Express
   }
 };
 
