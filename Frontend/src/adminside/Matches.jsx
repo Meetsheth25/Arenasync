@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./Matches.css";
 
 export default function Matches() {
@@ -23,8 +24,8 @@ export default function Matches() {
   /* LOAD INITIAL DATA */
   useEffect(() => {
     // Fetch all tournaments for admin
-    axios.get("http://localhost:5000/api/tournaments", auth).then(res => setTournaments(res.data));
-    axios.get("http://localhost:5000/api/venues").then(res => setVenues(res.data));
+    axios.get(API_URL + "/tournaments", auth).then(res => setTournaments(res.data));
+    axios.get(API_URL + "/venues").then(res => setVenues(res.data));
   }, []);
 
   /* FETCH ROUND INFO + MATCHES WHEN TOURNAMENT SELECTED */
@@ -39,7 +40,7 @@ export default function Matches() {
 
   const fetchRoundInfo = async (tournamentId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/tournaments/${tournamentId}/round-info`, auth);
+      const res = await axios.get(`${API_URL}/tournaments/${tournamentId}/round-info`, auth);
       setRoundInfo(res.data);
       const venue = res.data.tournament?.venueId;
       const vId = typeof venue === "object" ? venue?._id : venue;
@@ -56,7 +57,7 @@ export default function Matches() {
 
   const loadMatches = async (tournamentId) => {
     const res = await axios.get(
-      `http://localhost:5000/api/matches/tournament/${tournamentId}`,
+      `${API_URL}/matches/tournament/${tournamentId}`,
       auth
     );
     setMatches(res.data);
@@ -80,7 +81,7 @@ export default function Matches() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/matches",
+        API_URL + "/matches",
         {
           tournamentId: form.tournamentId,
           teams: [form.teamA, form.teamB],

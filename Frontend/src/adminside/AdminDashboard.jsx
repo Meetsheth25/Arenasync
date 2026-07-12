@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import { motion } from "framer-motion";
@@ -56,7 +57,7 @@ export default function AdminDashboard() {
   const handleManualDistribute = async (tournamentId) => {
     try {
       setActionLoadingId(tournamentId);
-      const res = await axios.post(`http://localhost:5000/api/prize-distributions/distribute/${tournamentId}`, {}, authHeader);
+      const res = await axios.post(`${API_URL}/prize-distributions/distribute/${tournamentId}`, {}, authHeader);
       alert(`✅ Prize distributed successfully! Distribution ID: ${res.data.distributionId}`);
       loadDashboardData();
     } catch (err) {
@@ -76,26 +77,26 @@ export default function AdminDashboard() {
     try {
       setLoading(true);
 
-      const usersRes = await axios.get("http://localhost:5000/api/users", authHeader);
+      const usersRes = await axios.get(API_URL + "/users", authHeader);
       console.log("USERS OK");
 
-      const tournamentsRes = await axios.get("http://localhost:5000/api/tournaments/public");
+      const tournamentsRes = await axios.get(API_URL + "/tournaments/public");
       console.log("TOURNAMENTS OK");
 
-      const teamsRes = await axios.get("http://localhost:5000/api/teams", authHeader);
+      const teamsRes = await axios.get(API_URL + "/teams", authHeader);
       console.log("TEAMS OK");
 
-      const sponsorsRes = await axios.get("http://localhost:5000/api/sponsors", authHeader);
+      const sponsorsRes = await axios.get(API_URL + "/sponsors", authHeader);
       console.log("SPONSORS OK");
 
-      const registrationsRes = await axios.get("http://localhost:5000/api/registrations", authHeader);
+      const registrationsRes = await axios.get(API_URL + "/registrations", authHeader);
       console.log("REGISTRATIONS OK");
 
-      const analyticsRes = await axios.get("http://localhost:5000/api/analytics/stats", authHeader);
+      const analyticsRes = await axios.get(API_URL + "/analytics/stats", authHeader);
       const analyticsStats = analyticsRes.data.stats || {};
       console.log("ANALYTICS OK");
 
-      const distsRes = await axios.get("http://localhost:5000/api/prize-distributions", authHeader);
+      const distsRes = await axios.get(API_URL + "/prize-distributions", authHeader);
       setPrizeDistributions(distsRes.data || []);
       console.log("DISTRIBUTIONS OK");
 

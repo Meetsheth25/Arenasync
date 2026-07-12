@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./AdminDashboard.css";
 import "./addTeam.css";
 import { useNavigate } from "react-router-dom";
@@ -29,10 +30,10 @@ export default function AddTeam() {
   const fetchData = async () => {
   try {
     // ✅ FIXED: Use public endpoint for tournaments
-    const tournamentsRes = await axios.get("http://localhost:5000/api/tournaments/public");
+    const tournamentsRes = await axios.get(API_URL + "/tournaments/public");
     setTournaments(tournamentsRes.data);
 
-    const usersRes = await axios.get("http://localhost:5000/api/users", auth);
+    const usersRes = await axios.get(API_URL + "/users", auth);
     const allowed = usersRes.data.filter(u =>
       ["organizer", "coach"].includes(u.role)
     );
@@ -63,7 +64,7 @@ export default function AddTeam() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/teams",
+        API_URL + "/teams",
         {
           teamName: form.teamName.trim(),
           tournamentId: form.tournamentId,

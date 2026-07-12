@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { useParams, useNavigate } from "react-router-dom";
 import "./TournamentDetails.css";
 import SkeletonTournament from "../components/loading/SkeletonTournament";
@@ -20,7 +21,7 @@ export default function TournamentDetails() {
   const fetchTournament = async () => {
     try {
       // ✅ FIXED: Use public endpoint to get tournament details
-      const res = await axios.get(`http://localhost:5000/api/tournaments/public/${id}`);
+      const res = await axios.get(`${API_URL}/tournaments/public/${id}`);
       setTournament(res.data);
     } catch (err) {
       console.error("Failed to fetch tournament:", err);
@@ -34,7 +35,7 @@ export default function TournamentDetails() {
     if (!window.confirm("Are you sure you want to delete this tournament?")) return;
     
     try {
-      await axios.delete(`http://localhost:5000/api/tournaments/${id}`, auth);
+      await axios.delete(`${API_URL}/tournaments/${id}`, auth);
       alert("Tournament deleted successfully!");
       navigate("/admin/tournaments");
     } catch (err) {

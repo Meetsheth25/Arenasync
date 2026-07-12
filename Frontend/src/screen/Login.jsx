@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { useAuth } from "../context/AuthContext";
 import { validateEmail, validatePassword } from "../utils/validators";
 import "./Login.css";
@@ -59,7 +60,7 @@ export default function Login() {
     setErrors({});
 
     try {
-      const res = await axios.post("http://localhost:5000/api/login", form);
+      const res = await axios.post(API_URL + "/login", form);
       login(res.data.user, res.data.token);
       
       if (res.data.user.role === "admin") {
@@ -85,7 +86,7 @@ export default function Login() {
   const handleResendVerification = async () => {
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/resend-otp", {
+      await axios.post(API_URL + "/resend-otp", {
         phoneNumber: verificationPhone
       });
       alert("New OTP sent to your mobile number!");
@@ -107,7 +108,7 @@ export default function Login() {
     setErrors({});
     
     try {
-      await axios.post("http://localhost:5000/api/verify-phone", {
+      await axios.post(API_URL + "/verify-phone", {
         phoneNumber: verificationPhone,
         code: verificationCode
       });

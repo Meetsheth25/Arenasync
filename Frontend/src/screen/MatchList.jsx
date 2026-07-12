@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "../static/MatchList.css";
 import SkeletonMatch from "../components/loading/SkeletonMatch";
 
@@ -22,7 +23,7 @@ export default function MatchList() {
   const fetchMatches = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/matches", auth);
+      const res = await axios.get(API_URL + "/matches", auth);
       setMatches(res.data);
     } catch (err) {
       console.error("Failed to fetch matches:", err);
@@ -37,7 +38,7 @@ export default function MatchList() {
     if (!window.confirm("Are you sure you want to delete this match?")) return;
     
     try {
-      await axios.delete(`http://localhost:5000/api/matches/${id}`, auth);
+      await axios.delete(`${API_URL}/matches/${id}`, auth);
       alert("✅ Match deleted successfully!");
       fetchMatches();
     } catch (err) {
@@ -50,7 +51,7 @@ export default function MatchList() {
   const handleUpdateResult = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/matches/${editMatch._id}/result`,
+        `${API_URL}/matches/${editMatch._id}/result`,
         {
           winnerTeamId: editMatch.winnerTeamId,
           score: editMatch.score,

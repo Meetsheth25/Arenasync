@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "../static/SponsorAccountManagement.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
 
@@ -22,7 +23,7 @@ export default function SponsorAccountManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:5000/api/users", authHeader);
+      const res = await axios.get(API_URL + "/users", authHeader);
       // Filter only users with the role "sponsor"
       const sponsorUsers = (res.data || []).filter((u) => u && u.role === "sponsor");
       setSponsors(sponsorUsers);
@@ -44,7 +45,7 @@ export default function SponsorAccountManagement() {
     }
 
     try {
-      await axios.put(`http://localhost:5000/api/users/${id}`, { status: newStatus }, authHeader);
+      await axios.put(`${API_URL}/users/${id}`, { status: newStatus }, authHeader);
       alert(`Sponsor account successfully updated to ${newStatus}.`);
       fetchSponsors();
     } catch (err) {

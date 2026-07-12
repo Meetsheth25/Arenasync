@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "./TournamentList.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
@@ -21,7 +22,7 @@ export default function TournamentList() {
   // ✅ IMPORTANT: Using PUBLIC endpoint
   const fetchTournaments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tournaments/public");
+      const res = await axios.get(API_URL + "/tournaments/public");
       setTournaments(res.data);
     } catch (err) {
       console.error("Failed to load tournaments:", err);
@@ -42,7 +43,7 @@ export default function TournamentList() {
   const saveEdit = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/tournaments/${editData._id}`,
+        `${API_URL}/tournaments/${editData._id}`,
         {
           eventName: editData.eventName,
           location: editData.location,
@@ -66,7 +67,7 @@ export default function TournamentList() {
   const deleteTournament = async (id) => {
     if (!window.confirm("Delete this tournament?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/tournaments/${id}`, auth);
+      await axios.delete(`${API_URL}/tournaments/${id}`, auth);
       fetchTournaments();
       alert("✅ Tournament deleted successfully");
     } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./AdminDashboard.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
 
@@ -20,7 +21,7 @@ export default function TeamList() {
   const loadTeams = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/teams", auth);
+      const res = await axios.get(API_URL + "/teams", auth);
       setTeams(res.data);
     } catch (err) {
       setMessage({ type: "error", text: "Failed to load teams" });
@@ -38,7 +39,7 @@ export default function TeamList() {
     if (!window.confirm("Are you sure you want to delete this team?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/teams/${id}`, auth);
+      await axios.delete(`${API_URL}/teams/${id}`, auth);
       setMessage({ type: "success", text: "Team deleted successfully" });
       setTeams(prev => prev.filter(t => t._id !== id));
     } catch {
@@ -61,7 +62,7 @@ export default function TeamList() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/teams/${editTeam._id}`,
+        `${API_URL}/teams/${editTeam._id}`,
         { teamName: editTeam.teamName },
         auth
       );

@@ -11,10 +11,26 @@ const app = express();
 /* ================= CREATE SERVER ================= */
 const server = http.createServer(app);
 
+/* ================= CORS CONFIGURATION ================= */
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+const corsOptionsOrigin = (origin, callback) => {
+  // Allow requests with no origin (like server-to-server or curl requests)
+  if (!origin) return callback(null, true);
+  if (allowedOrigins.includes(origin)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Not allowed by CORS"));
+  }
+};
+
 /* ================= SOCKET.IO ================= */
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: corsOptionsOrigin,
     credentials: true,
   },
 });
@@ -55,7 +71,7 @@ app.set("users", users);
 /* ================= CORS ================= */
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: corsOptionsOrigin,
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function EditTournament() {
@@ -14,7 +15,7 @@ export default function EditTournament() {
 
   useEffect(() => {
     fetchTournament();
-    axios.get("http://localhost:5000/api/users/public").then(res => {
+    axios.get(API_URL + "/users/public").then(res => {
       const orgs = res.data.filter(u => u.role === "organizer");
       setOrganizers(orgs);
     });
@@ -23,7 +24,7 @@ export default function EditTournament() {
   // ✅ FIXED: Use public endpoint to GET tournament data
   const fetchTournament = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/tournaments/public/${id}`);
+      const res = await axios.get(`${API_URL}/tournaments/public/${id}`);
       setForm(res.data);
     } catch (err) {
       console.error("Failed to fetch tournament:", err);
@@ -44,7 +45,7 @@ export default function EditTournament() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/tournaments/${id}`,
+        `${API_URL}/tournaments/${id}`,
         {
           eventName: form.eventName,
           location: form.location,

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./AdminDashboard.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
 
@@ -20,8 +21,8 @@ export default function Reports() {
     try {
       setLoading(true);
       const [tournamentsRes, registrationsRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/tournaments/public"),
-        axios.get("http://localhost:5000/api/registrations", auth),
+        axios.get(API_URL + "/tournaments/public"),
+        axios.get(API_URL + "/registrations", auth),
       ]);
       setTournaments(tournamentsRes.data || []);
       setRegistrations(registrationsRes.data || []);

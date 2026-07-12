@@ -18,6 +18,50 @@ transporter.verify((error, success) => {
   }
 });
 
+// Validate and send via Brevo Transactional Email REST API
+const sendBrevoTransactionalEmail = async ({ to, subject, htmlContent, textContent }) => {
+  const apiKey = process.env.BREVO_API_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL;
+  const senderName = process.env.BREVO_SENDER_NAME || "ArenaSync";
+
+  if (!apiKey || !senderEmail) {
+    throw new Error("Brevo OTP email service is not configured");
+  }
+
+  const payload = {
+    sender: {
+      name: senderName,
+      email: senderEmail,
+    },
+    to: [
+      {
+        email: to,
+      },
+    ],
+    subject,
+    htmlContent,
+  };
+
+  if (textContent) {
+    payload.textContent = textContent;
+  }
+
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": apiKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Brevo API error: ${response.status}`);
+  }
+
+  return true;
+};
+
 // ================= SEND VERIFICATION EMAIL =================
 const sendVerificationEmail = async (email, verificationCode, name) => {
   const mailOptions = {
@@ -84,11 +128,8 @@ const sendVerificationEmail = async (email, verificationCode, name) => {
 
 // ================= SEND PASSWORD RESET EMAIL =================
 const sendResetPasswordEmail = async (email, resetCode, name) => {
-  const mailOptions = {
-    from: `"ArenaSync Support" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "🔐 Password Reset Request - ArenaSync",
-    html: `
+  try {
+    const htmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
@@ -133,12 +174,13 @@ const sendResetPasswordEmail = async (email, resetCode, name) => {
         </div>
       </body>
       </html>
-    `,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log(`✅ Password reset email sent to ${email}`);
+    `;
+    await sendBrevoTransactionalEmail({
+      to: email,
+      subject: "🔐 Password Reset Request - ArenaSync",
+      htmlContent,
+    });
+    console.log(`✅ Password reset email sent to ${email} via Brevo API`);
     return true;
   } catch (error) {
     console.error("❌ Password reset email error:", error.message);
@@ -206,12 +248,8 @@ const sendWelcomeEmail = async (email, name) => {
 
 // ================= SEND REGISTRATION EMAIL OTP =================
 const sendRegistrationEmailOtp = async (email, otpCode) => {
-  const mailOptions = {
-    from: `"ArenaSync Support" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "ArenaSync Email Verification",
-    text: `Your ArenaSync verification code is:\n\n${otpCode}\n\nThis OTP expires in 5 minutes.\n\nIf you did not request this verification, ignore this email.`,
-    html: `
+  try {
+    const htmlContent = `
       <div style="font-family: sans-serif; max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
         <h2 style="color: #4f46e5; margin-bottom: 20px;">ArenaSync Email Verification</h2>
         <p>Your ArenaSync verification code is:</p>
@@ -221,12 +259,16 @@ const sendRegistrationEmailOtp = async (email, otpCode) => {
         <p>This OTP expires in 5 minutes.</p>
         <p style="color: #64748b; font-size: 14px; margin-top: 20px;">If you did not request this verification, ignore this email.</p>
       </div>
-    `
-  };
+    `;
+    const textContent = `Your ArenaSync verification code is:\n\n${otpCode}\n\nThis OTP expires in 5 minutes.\n\nIf you did not request this verification, ignore this email.`;
 
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log(`✅ Registration OTP email sent to ${email}`);
+    await sendBrevoTransactionalEmail({
+      to: email,
+      subject: "ArenaSync Email Verification",
+      htmlContent,
+      textContent,
+    });
+    console.log(`✅ Registration OTP email sent to ${email} via Brevo API`);
     return true;
   } catch (error) {
     console.error("❌ Registration OTP email error:", error.message);

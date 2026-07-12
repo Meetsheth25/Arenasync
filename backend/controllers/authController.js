@@ -105,25 +105,18 @@ exports.sendEmailOtp = async (req, res, next) => {
       { upsert: true, new: true }
     );
 
-    // ✉️ Show OTP in console for testing
-    console.log("\n" + "=".repeat(60));
-    console.log(`✉️ EMAIL VERIFICATION OTP`);
-    console.log("=".repeat(60));
-    console.log(`✉️ To: ${email}`);
-    console.log(`🔐 OTP Code: ${otpCode}`);
-    console.log(`⏰ Expires in: 5 minutes`);
-    console.log("=".repeat(60) + "\n");
+    console.log(`Registration OTP email requested for: ${email}`);
 
     // Send email
     const emailSent = await sendRegistrationEmailOtp(email, otpCode);
     if (!emailSent) {
-      console.log(`⚠️ Email sending failed, but OTP is shown above for testing.`);
+      console.error("Registration OTP email delivery failed");
+      return res.status(500).json({ message: "Failed to send OTP. Please try again." });
     }
 
     res.json({
       success: true,
-      message: "OTP sent successfully",
-      testCode: process.env.NODE_ENV !== "production" ? otpCode : undefined
+      message: "OTP sent successfully"
     });
   } catch (err) {
     console.error("SEND EMAIL OTP ERROR:", err);
@@ -251,25 +244,18 @@ exports.forgotPassword = async (req, res, next) => {
     user.resetPasswordExpires = resetExpires;
     await user.save();
 
-    // Show OTP in console
-    console.log("\n" + "=".repeat(60));
-    console.log(`🔐 PASSWORD RESET OTP`);
-    console.log("=".repeat(60));
-    console.log(`📧 To: ${email}`);
-    console.log(`📧 Name: ${user.name}`);
-    console.log(`🔐 Reset Code: ${resetCode}`);
-    console.log(`⏰ Expires in: 1 hour`);
-    console.log("=".repeat(60) + "\n");
+    console.log(`Password reset OTP requested for: ${email}`);
 
     const emailSent = await sendResetPasswordEmail(email, resetCode, user.name);
     
     if (!emailSent) {
-      console.log(`⚠️ Email sending failed, but OTP is shown above for testing.`);
+      console.error("Password reset OTP email delivery failed");
+      return res.status(500).json({ message: "Failed to send reset code. Please try again." });
     }
 
     res.json({ 
       success: true,
-      message: "Password reset code sent to your email. Check console for OTP." 
+      message: "Password reset code sent to your email." 
     });
   } catch (err) {
     console.error("Forgot password error:", err);
@@ -295,20 +281,14 @@ exports.resendResetOtp = async (req, res, next) => {
     user.resetPasswordExpires = resetExpires;
     await user.save();
 
-    // 📧 Show reset OTP in console for testing
-    console.log("\n" + "=".repeat(60));
-    console.log(`🔐 RESEND PASSWORD RESET OTP`);
-    console.log("=".repeat(60));
-    console.log(`📧 To: ${email}`);
-    console.log(`🔐 New Reset Code: ${resetCode}`);
-    console.log(`⏰ Expires in: 1 hour`);
-    console.log("=".repeat(60) + "\n");
+    console.log(`Resend password reset OTP requested for: ${email}`);
 
     // Send new reset email
     const emailSent = await sendResetPasswordEmail(email, resetCode, user.name);
     
     if (!emailSent) {
-      console.log(`⚠️ Email sending failed, but OTP is shown above for testing.`);
+      console.error("Password reset OTP email delivery failed");
+      return res.status(500).json({ message: "Failed to resend code" });
     }
 
     res.json({ message: "New password reset code sent to your email" });

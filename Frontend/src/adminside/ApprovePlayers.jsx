@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./AdminDashboard.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
 
@@ -26,7 +27,7 @@ export default function ApprovePlayers() {
       setLoading(true);
 
       const res = await axios.get(
-        "http://localhost:5000/api/registrations",
+        API_URL + "/registrations",
         auth
       );
 
@@ -48,7 +49,7 @@ export default function ApprovePlayers() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/registrations/${id}`,
+        `${API_URL}/registrations/${id}`,
         { approvalStatus: status },
         auth
       );

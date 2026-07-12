@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword, validateConfirmPassword } from "../utils/validators";
 import "./Login.css";
@@ -30,7 +31,7 @@ export default function ForgotPassword() {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/forgot-password", { email });
+      const res = await axios.post(API_URL + "/forgot-password", { email });
       setMessage(res.data.message);
       setStep(2);
     } catch (err) {
@@ -65,7 +66,7 @@ export default function ForgotPassword() {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/reset-password", {
+      await axios.post(API_URL + "/reset-password", {
         email,
         code,
         newPassword,

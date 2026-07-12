@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { 
   User, 
   Shield, 
@@ -140,7 +141,7 @@ export default function AdminUsers() {
   const loadUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/users",
+        API_URL + "/users",
         authHeader
       );
       // ✅ Filter out any null/undefined users and ensure we have an array
@@ -156,7 +157,7 @@ export default function AdminUsers() {
   const toggleStatus = async (id, current) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/users/${id}`,
+        `${API_URL}/users/${id}`,
         { status: current === "active" ? "blocked" : "active" },
         authHeader
       );
@@ -173,7 +174,7 @@ export default function AdminUsers() {
       return;
     }
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`, authHeader);
+      await axios.delete(`${API_URL}/users/${id}`, authHeader);
       alert("User deleted successfully!");
       loadUsers();
     } catch (err) {
@@ -202,7 +203,7 @@ export default function AdminUsers() {
   const saveEdit = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/users/${editUser._id}`,
+        `${API_URL}/users/${editUser._id}`,
         editForm,
         authHeader
       );

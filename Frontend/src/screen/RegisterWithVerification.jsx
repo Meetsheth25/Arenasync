@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { 
   validateEmail, 
   validatePassword, 
@@ -110,7 +111,7 @@ export default function RegisterWithVerification() {
     
     setIsEmailChecking(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/check-email", { email });
+      const res = await axios.post(API_URL + "/check-email", { email });
       if (!res.data.available) {
         setErrors(prev => ({ ...prev, email: "Email already registered. Please use a different email." }));
         setEmailAvailable(false);
@@ -141,7 +142,7 @@ export default function RegisterWithVerification() {
     setOtpError("");
     setOtpMessage("");
     try {
-      const res = await axios.post("http://localhost:5000/api/send-email-otp", {
+      const res = await axios.post(API_URL + "/send-email-otp", {
         email: formData.email
       });
       setOtpSent(true);
@@ -164,7 +165,7 @@ export default function RegisterWithVerification() {
     setOtpError("");
     setOtpMessage("");
     try {
-      await axios.post("http://localhost:5000/api/verify-email-otp", {
+      await axios.post(API_URL + "/verify-email-otp", {
         email: formData.email,
         otp: verificationCode
       });
@@ -213,7 +214,7 @@ export default function RegisterWithVerification() {
     setErrors({});
     
     try {
-      const res = await axios.post("http://localhost:5000/api/register", formData);
+      const res = await axios.post(API_URL + "/register", formData);
       alert("🎉 " + (res.data.message || "Registration successful! You can now login."));
       navigate("/login");
     } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import "./AdminDashboard.css";
 import SkeletonTable from "../components/loading/SkeletonTable";
 
@@ -26,7 +27,7 @@ export default function VenueManagement() {
   const fetchVenues = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/venues");
+      const res = await axios.get(API_URL + "/venues");
       setVenues(res.data);
     } catch (err) {
       console.error("Failed to fetch venues:", err);
@@ -73,14 +74,14 @@ export default function VenueManagement() {
       if (editingVenue) {
         // Update
         await axios.put(
-          `http://localhost:5000/api/venues/${editingVenue._id}`,
+          `${API_URL}/venues/${editingVenue._id}`,
           form,
           auth
         );
         alert("✅ Venue updated successfully!");
       } else {
         // Create
-        await axios.post("http://localhost:5000/api/venues", form, auth);
+        await axios.post(API_URL + "/venues", form, auth);
         alert("✅ Venue created successfully!");
       }
       
@@ -97,7 +98,7 @@ export default function VenueManagement() {
     if (!window.confirm(`Are you sure you want to delete "${name}"?`)) return;
     
     try {
-      await axios.delete(`http://localhost:5000/api/venues/${id}`, auth);
+      await axios.delete(`${API_URL}/venues/${id}`, auth);
       alert("✅ Venue deleted successfully!");
       fetchVenues();
     } catch (err) {

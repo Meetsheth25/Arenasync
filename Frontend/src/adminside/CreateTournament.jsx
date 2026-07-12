@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "./CreateTournament.css";
 
@@ -27,9 +28,9 @@ export default function CreateTournament() {
 
   /* LOAD SPORTS, VENUES & ORGANIZERS */
   useEffect(() => {
-    axios.get("http://localhost:5000/api/sports").then(res => setSports(res.data));
-    axios.get("http://localhost:5000/api/venues").then(res => setVenues(res.data));
-    axios.get("http://localhost:5000/api/users/public").then(res => {
+    axios.get(API_URL + "/sports").then(res => setSports(res.data));
+    axios.get(API_URL + "/venues").then(res => setVenues(res.data));
+    axios.get(API_URL + "/users/public").then(res => {
       const orgs = res.data.filter(u => u.role === "organizer");
       setOrganizers(orgs);
     });
@@ -61,7 +62,7 @@ export default function CreateTournament() {
       if (logoFile) data.append("logo", logoFile);
 
       await axios.post(
-        "http://localhost:5000/api/tournaments",
+        API_URL + "/tournaments",
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );

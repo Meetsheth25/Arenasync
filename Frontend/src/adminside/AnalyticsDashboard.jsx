@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import io from "socket.io-client";
+import { SOCKET_URL } from "../utils/socket";
+import { API_URL } from "../utils/axiosConfig";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -85,7 +87,7 @@ export default function AnalyticsDashboard() {
 
   const setupSocketConnection = () => {
     // Connect to Socket.IO
-    socketRef.current = io("http://localhost:5000", {
+    socketRef.current = io(SOCKET_URL, {
       transports: ["websocket"],
       auth: { token },
     });
@@ -131,7 +133,7 @@ export default function AnalyticsDashboard() {
   const fetchAnalytics = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/analytics/stats", auth);
+      const response = await axios.get(API_URL + "/analytics/stats", auth);
       
       if (response.data) {
         updateDashboardData(response.data);
