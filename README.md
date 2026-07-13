@@ -22,8 +22,7 @@ ArenaSync connects administrators, organizers, coaches, players, and sponsors in
 ## 🌐 Live Deployment
 
 * **Frontend Application**: [https://arenasync-tau.vercel.app](https://arenasync-tau.vercel.app)
-* **Backend API Base**: [https://arenasync.onrender.com/api](https://arenasync.onrender.com/api)
-* **Socket.IO Endpoint**: [https://arenasync.onrender.com](https://arenasync.onrender.com)
+* **Backend API Base**: [https://arenasync.onrender.com/api](https://arenasync.onrender.com)
 
 *Note: The backend is hosted on the Render free-tier, which spins down after periods of inactivity. If visiting the live site for the first time in a while, please allow up to 50 seconds for the backend instance to spin up.*
 
